@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShuffleHeaven.cs" />
     <Compile Include="Randee.cs">
       <SubType>Form</SubType>
     </Compile>
