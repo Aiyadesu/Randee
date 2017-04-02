@@ -10,13 +10,13 @@ namespace Randee
     class ShuffleHeaven
     {
         /* Class Fields */
-        private static RNGCryptoServiceProvider crng = new RNGCryptoServiceProvider();
 
-        private byte[] randomNumbers;
+        private static RNGCryptoServiceProvider crng = new RNGCryptoServiceProvider();
 
 
 
         /* Default Constructor */
+
         public ShuffleHeaven()
         {
             // do nothing for now
@@ -25,8 +25,6 @@ namespace Randee
 
 
         /* Main Functions */
-
-
 
         // Use to generate a random number between the range of 1 and the 'maxRange'.
         // The input parameter is the 'maxRange' i.e To simulate rolling a 6-sided you would input "6" as the 'maxRange' parameter.
@@ -54,8 +52,6 @@ namespace Randee
 
 
         /* Helper Functions */
-
-
 
         // Use to ensure each random number returned has an equal probability of occurring i.e "Uniformly Distributed"
         // Ripped from https://msdn.microsoft.com/en-us/library/system.security.cryptography.rngcryptoserviceprovider(v=vs.110).aspx

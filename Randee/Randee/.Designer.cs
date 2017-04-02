@@ -31,7 +31,9 @@
             this.titleBar = new System.Windows.Forms.PictureBox();
             this.generateNumber = new System.Windows.Forms.Button();
             this.numberDisplay = new System.Windows.Forms.TextBox();
+            this.rangeInput = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.titleBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeInput)).BeginInit();
             this.SuspendLayout();
             // 
             // titleBar
@@ -66,11 +68,25 @@
             this.numberDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numberDisplay.TextChanged += new System.EventHandler(this.numberDisplay_TextChanged);
             // 
+            // rangeInput
+            // 
+            this.rangeInput.Location = new System.Drawing.Point(327, 146);
+            this.rangeInput.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.rangeInput.Name = "rangeInput";
+            this.rangeInput.Size = new System.Drawing.Size(120, 20);
+            this.rangeInput.TabIndex = 3;
+            this.rangeInput.ValueChanged += new System.EventHandler(this.rangeInput_ValueChanged);
+            // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.rangeInput);
             this.Controls.Add(this.numberDisplay);
             this.Controls.Add(this.generateNumber);
             this.Controls.Add(this.titleBar);
@@ -80,6 +96,7 @@
             this.Text = "Randee";
             this.Load += new System.EventHandler(this.Randee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.titleBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rangeInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,6 +107,7 @@
         private System.Windows.Forms.PictureBox titleBar;
         private System.Windows.Forms.Button generateNumber;
         private System.Windows.Forms.TextBox numberDisplay;
+        private System.Windows.Forms.NumericUpDown rangeInput;
     }
 }
 
