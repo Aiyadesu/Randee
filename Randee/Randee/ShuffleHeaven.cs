@@ -19,17 +19,10 @@ namespace Randee
         /* Default Constructor */
         public ShuffleHeaven()
         {
-            randomNumbers = new byte[14];
-            for(int i = 0; i < 14; i++)
-            {
-                randomNumbers[i] = GenerateNumber(100);
-            }
-
-            foreach(byte number in randomNumbers)
-            {
-                Console.WriteLine(number);
-            }
+            // do nothing for now
         }
+
+
 
         /* Main Functions */
 
@@ -57,6 +50,8 @@ namespace Randee
 
             return (byte)((randomNumber[0] % maxRange) + 1); // Adjusted for zero-indexed memery
         }
+
+
 
         /* Helper Functions */
 
