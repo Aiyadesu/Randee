@@ -30,15 +30,16 @@ namespace Randee
         // The input parameter is the 'maxRange' i.e To simulate rolling a 6-sided you would input "6" as the 'maxRange' parameter.
         public static byte GenerateNumber(byte minRange, byte maxRange)
         {
-            byte range = (byte)(maxRange - minRange + 1); // Simplies the min and max values to a range starting from 1
-
             if(minRange <= 0 || maxRange <= 0)
             {
                 throw new ArgumentOutOfRangeException("maxRange is invalid! Cannot be less than or equal to 0");
             }
 
             // Create a byte array to hold the random value.
-            byte[] randomNumber = new byte[1]; 
+            byte[] randomNumber = new byte[1];
+
+            // Simplies the min and max values to a range starting from 1
+            byte range = (byte)(maxRange - minRange + 1);
 
             do
             {
