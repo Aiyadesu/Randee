@@ -21,5 +21,21 @@ namespace Randee
         {
 
         }
+
+        private void titleBar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void generateNumber_Click(object sender, EventArgs e)
+        {
+            //ShuffleHeaven.GenerateNumber(100);
+            numberDisplay.Text = ShuffleHeaven.GenerateNumber(100).ToString();
+        }
+
+        private void numberDisplay_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
