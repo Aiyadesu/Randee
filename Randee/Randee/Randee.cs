@@ -29,15 +29,20 @@ namespace Randee
 
         private void generateNumber_Click(object sender, EventArgs e)
         {
-            numberDisplay.Text = ShuffleHeaven.GenerateNumber((byte)rangeInput.Value).ToString();
+            numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((byte)minRangeInput.Value, (byte)maxRangeInput.Value).ToString();
         }
 
-        private void numberDisplay_TextChanged(object sender, EventArgs e)
+        private void rangeInput_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void rangeInput_ValueChanged(object sender, EventArgs e)
+        private void numberDisplay_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void minRangeInput_ValueChanged(object sender, EventArgs e)
         {
 
         }

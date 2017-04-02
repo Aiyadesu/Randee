@@ -30,10 +30,15 @@
         {
             this.titleBar = new System.Windows.Forms.PictureBox();
             this.generateNumber = new System.Windows.Forms.Button();
-            this.numberDisplay = new System.Windows.Forms.TextBox();
-            this.rangeInput = new System.Windows.Forms.NumericUpDown();
+            this.maxRangeInput = new System.Windows.Forms.NumericUpDown();
+            this.numberDisplay = new System.Windows.Forms.Label();
+            this.customRangeLabel = new System.Windows.Forms.Label();
+            this.fromLabel = new System.Windows.Forms.Label();
+            this.minRangeInput = new System.Windows.Forms.NumericUpDown();
+            this.toLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.titleBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rangeInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
             this.SuspendLayout();
             // 
             // titleBar
@@ -42,7 +47,7 @@
             this.titleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.titleBar.Location = new System.Drawing.Point(0, 0);
             this.titleBar.Name = "titleBar";
-            this.titleBar.Size = new System.Drawing.Size(1280, 50);
+            this.titleBar.Size = new System.Drawing.Size(420, 42);
             this.titleBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.titleBar.TabIndex = 0;
             this.titleBar.TabStop = false;
@@ -50,44 +55,116 @@
             // 
             // generateNumber
             // 
-            this.generateNumber.Location = new System.Drawing.Point(340, 211);
+            this.generateNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.generateNumber.Location = new System.Drawing.Point(300, 325);
             this.generateNumber.Name = "generateNumber";
-            this.generateNumber.Size = new System.Drawing.Size(75, 23);
+            this.generateNumber.Size = new System.Drawing.Size(100, 32);
             this.generateNumber.TabIndex = 1;
             this.generateNumber.Text = "Generate!";
             this.generateNumber.UseVisualStyleBackColor = true;
             this.generateNumber.Click += new System.EventHandler(this.generateNumber_Click);
             // 
-            // numberDisplay
+            // maxRangeInput
             // 
-            this.numberDisplay.BackColor = System.Drawing.SystemColors.Control;
-            this.numberDisplay.Location = new System.Drawing.Point(327, 185);
-            this.numberDisplay.Name = "numberDisplay";
-            this.numberDisplay.Size = new System.Drawing.Size(100, 20);
-            this.numberDisplay.TabIndex = 2;
-            this.numberDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numberDisplay.TextChanged += new System.EventHandler(this.numberDisplay_TextChanged);
-            // 
-            // rangeInput
-            // 
-            this.rangeInput.Location = new System.Drawing.Point(327, 146);
-            this.rangeInput.Maximum = new decimal(new int[] {
+            this.maxRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maxRangeInput.Location = new System.Drawing.Point(203, 325);
+            this.maxRangeInput.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.rangeInput.Name = "rangeInput";
-            this.rangeInput.Size = new System.Drawing.Size(120, 20);
-            this.rangeInput.TabIndex = 3;
-            this.rangeInput.ValueChanged += new System.EventHandler(this.rangeInput_ValueChanged);
+            this.maxRangeInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.maxRangeInput.Name = "maxRangeInput";
+            this.maxRangeInput.Size = new System.Drawing.Size(80, 29);
+            this.maxRangeInput.TabIndex = 3;
+            this.maxRangeInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.maxRangeInput.Value = new decimal(new int[] {
+            14,
+            0,
+            0,
+            0});
+            this.maxRangeInput.ValueChanged += new System.EventHandler(this.rangeInput_ValueChanged);
+            // 
+            // numberDisplay
+            // 
+            this.numberDisplay.AutoSize = true;
+            this.numberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberDisplay.Location = new System.Drawing.Point(93, 375);
+            this.numberDisplay.Name = "numberDisplay";
+            this.numberDisplay.Size = new System.Drawing.Size(234, 24);
+            this.numberDisplay.TabIndex = 4;
+            this.numberDisplay.Text = "Your random number is 14";
+            this.numberDisplay.Click += new System.EventHandler(this.numberDisplay_Click);
+            // 
+            // fromLabel
+            // 
+            this.customRangeLabel.AutoSize = true;
+            this.customRangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customRangeLabel.Location = new System.Drawing.Point(75, 284);
+            this.customRangeLabel.Name = "fromLabel";
+            this.customRangeLabel.Size = new System.Drawing.Size(279, 24);
+            this.customRangeLabel.TabIndex = 5;
+            this.customRangeLabel.Text = "Custom Range (min 1, max 255)";
+            // 
+            // toLabel
+            // 
+            this.fromLabel.AutoSize = true;
+            this.fromLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromLabel.Location = new System.Drawing.Point(20, 325);
+            this.fromLabel.Name = "toLabel";
+            this.fromLabel.Size = new System.Drawing.Size(55, 24);
+            this.fromLabel.TabIndex = 6;
+            this.fromLabel.Text = "From";
+            // 
+            // minRangeInput
+            // 
+            this.minRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minRangeInput.Location = new System.Drawing.Point(81, 325);
+            this.minRangeInput.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.minRangeInput.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minRangeInput.Name = "minRangeInput";
+            this.minRangeInput.Size = new System.Drawing.Size(80, 29);
+            this.minRangeInput.TabIndex = 7;
+            this.minRangeInput.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.minRangeInput.ValueChanged += new System.EventHandler(this.minRangeInput_ValueChanged);
+            // 
+            // label3
+            // 
+            this.toLabel.AutoSize = true;
+            this.toLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toLabel.Location = new System.Drawing.Point(170, 325);
+            this.toLabel.Name = "label3";
+            this.toLabel.Size = new System.Drawing.Size(25, 24);
+            this.toLabel.TabIndex = 8;
+            this.toLabel.Text = "to";
             // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1280, 720);
-            this.Controls.Add(this.rangeInput);
+            this.ClientSize = new System.Drawing.Size(420, 420);
+            this.Controls.Add(this.toLabel);
+            this.Controls.Add(this.minRangeInput);
+            this.Controls.Add(this.fromLabel);
+            this.Controls.Add(this.customRangeLabel);
             this.Controls.Add(this.numberDisplay);
+            this.Controls.Add(this.maxRangeInput);
             this.Controls.Add(this.generateNumber);
             this.Controls.Add(this.titleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -96,7 +173,8 @@
             this.Text = "Randee";
             this.Load += new System.EventHandler(this.Randee_Load);
             ((System.ComponentModel.ISupportInitialize)(this.titleBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.rangeInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,8 +184,12 @@
 
         private System.Windows.Forms.PictureBox titleBar;
         private System.Windows.Forms.Button generateNumber;
-        private System.Windows.Forms.TextBox numberDisplay;
-        private System.Windows.Forms.NumericUpDown rangeInput;
+        private System.Windows.Forms.NumericUpDown minRangeInput;
+        private System.Windows.Forms.NumericUpDown maxRangeInput;
+        private System.Windows.Forms.Label numberDisplay;
+        private System.Windows.Forms.Label customRangeLabel;
+        private System.Windows.Forms.Label fromLabel;
+        private System.Windows.Forms.Label toLabel;
     }
 }
 
