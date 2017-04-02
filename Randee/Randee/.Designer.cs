@@ -28,21 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.titleBar = new System.Windows.Forms.PictureBox();
+            this.generateNumber = new System.Windows.Forms.Button();
+            this.numberDisplay = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.titleBar)).BeginInit();
             this.SuspendLayout();
             // 
-            // Form1
+            // titleBar
+            // 
+            this.titleBar.BackColor = System.Drawing.Color.Transparent;
+            this.titleBar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.titleBar.Location = new System.Drawing.Point(0, 0);
+            this.titleBar.Name = "titleBar";
+            this.titleBar.Size = new System.Drawing.Size(1280, 50);
+            this.titleBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.titleBar.TabIndex = 0;
+            this.titleBar.TabStop = false;
+            this.titleBar.Click += new System.EventHandler(this.titleBar_Click);
+            // 
+            // generateNumber
+            // 
+            this.generateNumber.Location = new System.Drawing.Point(340, 211);
+            this.generateNumber.Name = "generateNumber";
+            this.generateNumber.Size = new System.Drawing.Size(75, 23);
+            this.generateNumber.TabIndex = 1;
+            this.generateNumber.Text = "Generate!";
+            this.generateNumber.UseVisualStyleBackColor = true;
+            this.generateNumber.Click += new System.EventHandler(this.generateNumber_Click);
+            // 
+            // numberDisplay
+            // 
+            this.numberDisplay.BackColor = System.Drawing.SystemColors.Control;
+            this.numberDisplay.Location = new System.Drawing.Point(327, 185);
+            this.numberDisplay.Name = "numberDisplay";
+            this.numberDisplay.Size = new System.Drawing.Size(100, 20);
+            this.numberDisplay.TabIndex = 2;
+            this.numberDisplay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numberDisplay.TextChanged += new System.EventHandler(this.numberDisplay_TextChanged);
+            // 
+            // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Name = "Form1";
+            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.numberDisplay);
+            this.Controls.Add(this.generateNumber);
+            this.Controls.Add(this.titleBar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Randee";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Randee";
             this.Load += new System.EventHandler(this.Randee_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.titleBar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.PictureBox titleBar;
+        private System.Windows.Forms.Button generateNumber;
+        private System.Windows.Forms.TextBox numberDisplay;
     }
 }
 
