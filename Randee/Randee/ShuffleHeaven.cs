@@ -35,19 +35,20 @@ namespace Randee
                 throw new ArgumentOutOfRangeException("maxRange is invalid! Cannot be less than or equal to 0");
             }
 
-            // Create a byte array to hold the random value.
+            // Create a byte array to hold the random value
             byte[] randomNumber = new byte[1];
 
             // Simplies the min and max values to a range starting from 1
             byte range = (byte)(maxRange - minRange + 1);
 
+            /* Generate a random number that is considered "fair" */
             do
             {
                 // Fill the array with a random value.
                 crng.GetBytes(randomNumber);
             }
 
-            while (!IsUniformlyDistributed(randomNumber[0], range));
+            while (!IsUniformlyDistributed(randomNumber[0], range)); 
 
             return (byte)((randomNumber[0] % range) + minRange); // Offsets the simplied range starting from 1 to start from the 'minRange'
         }
