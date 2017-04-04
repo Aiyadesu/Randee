@@ -100,22 +100,22 @@
             this.numberDisplay.Text = "Your random number is 14";
             this.numberDisplay.Click += new System.EventHandler(this.numberDisplay_Click);
             // 
-            // fromLabel
+            // customRangeLabel
             // 
             this.customRangeLabel.AutoSize = true;
             this.customRangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.customRangeLabel.Location = new System.Drawing.Point(75, 284);
-            this.customRangeLabel.Name = "fromLabel";
+            this.customRangeLabel.Name = "customRangeLabel";
             this.customRangeLabel.Size = new System.Drawing.Size(279, 24);
             this.customRangeLabel.TabIndex = 5;
             this.customRangeLabel.Text = "Custom Range (min 1, max 255)";
             // 
-            // toLabel
+            // fromLabel
             // 
             this.fromLabel.AutoSize = true;
             this.fromLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fromLabel.Location = new System.Drawing.Point(20, 325);
-            this.fromLabel.Name = "toLabel";
+            this.fromLabel.Name = "fromLabel";
             this.fromLabel.Size = new System.Drawing.Size(55, 24);
             this.fromLabel.TabIndex = 6;
             this.fromLabel.Text = "From";
@@ -144,12 +144,12 @@
             0});
             this.minRangeInput.ValueChanged += new System.EventHandler(this.minRangeInput_ValueChanged);
             // 
-            // label3
+            // toLabel
             // 
             this.toLabel.AutoSize = true;
             this.toLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toLabel.Location = new System.Drawing.Point(170, 325);
-            this.toLabel.Name = "label3";
+            this.toLabel.Name = "toLabel";
             this.toLabel.Size = new System.Drawing.Size(25, 24);
             this.toLabel.TabIndex = 8;
             this.toLabel.Text = "to";

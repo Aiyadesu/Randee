@@ -39,6 +39,15 @@ namespace Randee
                 throw new ArgumentOutOfRangeException("maxRange is invalid! Cannot be less than or equal to 0");
             }
 
+            // Swaps the 'minRange' and 'maxRange' values, if 'minRange' is larger than 'maxRange'
+            if(minRange > maxRange)
+            {
+                byte temp = minRange;
+
+                minRange = maxRange;
+                maxRange = temp;
+            }
+
             // Create a byte array to hold the random value
             byte[] randomNumber = new byte[1];
 
