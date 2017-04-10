@@ -29,7 +29,13 @@ namespace Randee
 
         private void generateNumber_Click(object sender, EventArgs e)
         {
-            numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((byte)minRangeInput.Value, (byte)maxRangeInput.Value).ToString();
+            if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
+            {
+                numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+            } else
+            {
+                numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateSmallNumber((byte)minRangeInput.Value, (byte)maxRangeInput.Value).ToString();
+            }
         }
 
         private void rangeInput_ValueChanged(object sender, EventArgs e)

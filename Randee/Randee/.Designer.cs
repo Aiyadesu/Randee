@@ -69,12 +69,7 @@
             this.maxRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.maxRangeInput.Location = new System.Drawing.Point(203, 325);
             this.maxRangeInput.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.maxRangeInput.Minimum = new decimal(new int[] {
-            1,
+            2000000000,
             0,
             0,
             0});
@@ -125,12 +120,7 @@
             this.minRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.minRangeInput.Location = new System.Drawing.Point(81, 325);
             this.minRangeInput.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.minRangeInput.Minimum = new decimal(new int[] {
-            1,
+            2000000000,
             0,
             0,
             0});
