@@ -33,7 +33,7 @@ namespace Randee
          * 'minRange' is the smallest number that can be generated.
          * 'maxRange' is the largest number that can be generated.
          */
-        public static byte GenerateSmallNumber(byte minRange, byte maxRange)
+        public static byte GenerateNumber(byte minRange, byte maxRange)
         {
             Console.WriteLine("Calling GenerateSmallNumber()");
 
@@ -76,7 +76,7 @@ namespace Randee
          * 'minRange' is the smallest number that can be generated.
          * 'maxRange' is the largest number that can be generated.
          */
-        public static byte[] GenerateSmallNumber(byte rolls, byte minRange, byte maxRange)
+        public static byte[] GenerateNumber(byte rolls, byte minRange, byte maxRange)
         {
             // Create a byte array to hold the results
             byte[] results = new byte[rolls];
@@ -84,7 +84,7 @@ namespace Randee
             // Stores a random number in an array
             for(int roll = 0; roll < rolls; roll++)
             {
-                results[roll] = GenerateSmallNumber(minRange, maxRange);
+                results[roll] = GenerateNumber(minRange, maxRange);
             }
 
             return results;
@@ -101,16 +101,6 @@ namespace Randee
             Random sprng = new Random(GenerateSeed());
             
             return sprng.Next(minRange, maxRange);
-        }
-
-
-
-        /*
-         * Convenience function for a 50% probability event
-         */
-         public static byte FlipCoin()
-        {
-            return GenerateSmallNumber(1, 2);
         }
 
 
