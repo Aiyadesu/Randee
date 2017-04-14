@@ -32,6 +32,8 @@ namespace Randee
             if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
             {
                 numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+                /* The called function is commented out */
+                //ShuffleHeaven.GetTrueRandomNumber(10, (int)minRangeInput.Value, (int)maxRangeInput.Value);
             }
             else
             {

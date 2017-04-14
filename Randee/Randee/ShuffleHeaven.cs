@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Net;
 
 namespace Randee
 {
@@ -12,7 +13,8 @@ namespace Randee
         /* Class Members */
 
         private static RNGCryptoServiceProvider crng    = new RNGCryptoServiceProvider();
-        private static Random prng                      = new Random(); 
+        private static Random prng                      = new Random();
+        private static WebClient webClient              = new WebClient();
 
 
 
@@ -142,5 +144,15 @@ namespace Randee
 
             return (int) seed;
         }
+
+        /* This function would only work on my computer unless I shared my private API key. Thinking of work around */
+        //public static void GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
+        //{
+        //    string requestID = "1414";
+        //    string response;
+
+        //    response = webClient.UploadString("https://api.random.org/json-rpc/1/invoke", "{\"jsonrpc\":\"2.0\",\"method\":\"generateIntegers\",\"params\":{\"apiKey\":\"" + Environment.GetEnvironmentVariable("RANDOM_ORG_API") + "\",\"n\":"
+        //        + numberOfNumbers.ToString() + ",\"min\":" + minRange.ToString() + ",\"max\":" + maxRange.ToString() + ",\"replacement\":true,\"base\":10},\"id\":" + requestID + "}");
+        //}
     }
 }
