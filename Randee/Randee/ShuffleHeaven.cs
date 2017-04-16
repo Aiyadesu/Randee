@@ -37,8 +37,6 @@ namespace Randee
          */
         public static byte GenerateNumber(byte minRange, byte maxRange)
         {
-            Console.WriteLine("Calling GenerateSmallNumber()");
-
             if(minRange <= 0 || maxRange <= 0)
             {
                 throw new ArgumentOutOfRangeException("maxRange is invalid! Cannot be less than or equal to 0");
@@ -99,7 +97,6 @@ namespace Randee
          */
         public static int GenerateNumber(int minRange, int maxRange)
         {
-            Console.WriteLine("Calling GenerateNumber()");
             Random sprng = new Random(GenerateSeed());
             
             return sprng.Next(minRange, maxRange);
