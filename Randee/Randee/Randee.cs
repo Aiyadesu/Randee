@@ -7,11 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace Randee
 {
     public partial class Randee : Form
     {
+        /* Move Window without 'Titlebar' in C# 
+         * Source: https://www.codeproject.com/Articles/11114/Move-window-form-without-Titlebar-in-C
+         */
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        /* Externally implemented functions (i.e from 'user32.dll') */
+        [DllImport("user32.dll")] 
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        // Default Constructor
         public Randee()
         {
             InitializeComponent();
@@ -27,6 +42,7 @@ namespace Randee
 
         }
 
+        // The main event function to be called
         private void generateNumber_Click(object sender, EventArgs e)
         {
             if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
@@ -54,6 +70,15 @@ namespace Randee
         private void minRangeInput_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Randee_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }

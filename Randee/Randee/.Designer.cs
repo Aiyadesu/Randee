@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.titleBar = new System.Windows.Forms.PictureBox();
             this.generateNumber = new System.Windows.Forms.Button();
             this.maxRangeInput = new System.Windows.Forms.NumericUpDown();
             this.numberDisplay = new System.Windows.Forms.Label();
@@ -36,22 +35,9 @@
             this.fromLabel = new System.Windows.Forms.Label();
             this.minRangeInput = new System.Windows.Forms.NumericUpDown();
             this.toLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.titleBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
             this.SuspendLayout();
-            // 
-            // titleBar
-            // 
-            this.titleBar.BackColor = System.Drawing.Color.Transparent;
-            this.titleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.titleBar.Location = new System.Drawing.Point(0, 0);
-            this.titleBar.Name = "titleBar";
-            this.titleBar.Size = new System.Drawing.Size(420, 42);
-            this.titleBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.titleBar.TabIndex = 0;
-            this.titleBar.TabStop = false;
-            this.titleBar.Click += new System.EventHandler(this.titleBar_Click);
             // 
             // generateNumber
             // 
@@ -156,13 +142,12 @@
             this.Controls.Add(this.numberDisplay);
             this.Controls.Add(this.maxRangeInput);
             this.Controls.Add(this.generateNumber);
-            this.Controls.Add(this.titleBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Randee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Randee";
             this.Load += new System.EventHandler(this.Randee_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.titleBar)).EndInit();
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Randee_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).EndInit();
             this.ResumeLayout(false);
@@ -171,8 +156,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox titleBar;
         private System.Windows.Forms.Button generateNumber;
         private System.Windows.Forms.NumericUpDown minRangeInput;
         private System.Windows.Forms.NumericUpDown maxRangeInput;
