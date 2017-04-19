@@ -1,0 +1,93 @@
+﻿namespace Randee
+{
+    partial class Settings
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.labelAPIKey = new System.Windows.Forms.Label();
+            this.textboxAPIKey = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // labelAPIKey
+            // 
+            this.labelAPIKey.AutoSize = true;
+            this.labelAPIKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelAPIKey.Location = new System.Drawing.Point(80, 43);
+            this.labelAPIKey.Name = "labelAPIKey";
+            this.labelAPIKey.Size = new System.Drawing.Size(274, 24);
+            this.labelAPIKey.TabIndex = 0;
+            this.labelAPIKey.Text = "Overwrite your current API key?";
+            this.labelAPIKey.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textboxAPIKey
+            // 
+            this.textboxAPIKey.AcceptsReturn = true;
+            this.textboxAPIKey.Location = new System.Drawing.Point(45, 80);
+            this.textboxAPIKey.Name = "textboxAPIKey";
+            this.textboxAPIKey.Size = new System.Drawing.Size(337, 20);
+            this.textboxAPIKey.TabIndex = 1;
+            this.textboxAPIKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textboxAPIKey.WordWrap = false;
+            this.textboxAPIKey.Enter += new System.EventHandler(this.textboxAPIKey_Enter);
+            this.textboxAPIKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textboxAPIKey_KeyDown);
+            this.textboxAPIKey.Leave += new System.EventHandler(this.textboxAPIKey_Leave);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(59, 203);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // Settings
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(420, 420);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textboxAPIKey);
+            this.Controls.Add(this.labelAPIKey);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "Settings";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "Form2";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label labelAPIKey;
+        private System.Windows.Forms.TextBox textboxAPIKey;
+        private System.Windows.Forms.Button button1;
+    }
+}

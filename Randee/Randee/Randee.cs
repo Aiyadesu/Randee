@@ -20,6 +20,8 @@ namespace Randee
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
+        public const string API_KEY = "RANDOM_ORG_API";
+
         private string appDirectory = Path.GetDirectoryName(Application.ExecutablePath);
 
         /* Externally implemented functions (i.e from 'user32.dll') */
@@ -142,7 +144,7 @@ namespace Randee
 
             /* No current settings detected */
             // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
-            settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable("RANDOM_ORG_API") == null ? "0" : "1") + "\r\n";
+            settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable(API_KEY) == null ? "0" : "1") + "\r\n";
 
             // Create a 'settings.txt' file that stores the users settings
             using (FileStream fileStream = File.Create(settingsPath))
@@ -150,6 +152,15 @@ namespace Randee
                 Byte[] settingsData = new UTF8Encoding(true).GetBytes(settings);
                 fileStream.Write(settingsData, 0, settingsData.Length);
             }
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            Settings settingsForm = new Settings();
+
+            settingsForm.Location = Location;
+
+            settingsForm.Show(this);
         }
     }
 }

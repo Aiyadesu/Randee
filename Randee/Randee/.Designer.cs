@@ -35,6 +35,7 @@
             this.fromLabel = new System.Windows.Forms.Label();
             this.minRangeInput = new System.Windows.Forms.NumericUpDown();
             this.toLabel = new System.Windows.Forms.Label();
+            this.settingsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
             this.SuspendLayout();
@@ -130,11 +131,22 @@
             this.toLabel.TabIndex = 8;
             this.toLabel.Text = "to";
             // 
+            // settingsButton
+            // 
+            this.settingsButton.Location = new System.Drawing.Point(226, 99);
+            this.settingsButton.Name = "settingsButton";
+            this.settingsButton.Size = new System.Drawing.Size(75, 23);
+            this.settingsButton.TabIndex = 9;
+            this.settingsButton.Text = "settingsButton";
+            this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 420);
+            this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.toLabel);
             this.Controls.Add(this.minRangeInput);
             this.Controls.Add(this.fromLabel);
@@ -163,6 +175,7 @@
         private System.Windows.Forms.Label customRangeLabel;
         private System.Windows.Forms.Label fromLabel;
         private System.Windows.Forms.Label toLabel;
+        private System.Windows.Forms.Button settingsButton;
     }
 }
 
