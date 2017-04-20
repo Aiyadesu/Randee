@@ -16,8 +16,10 @@ namespace Randee
         {
             InitializeComponent();
 
+            labelSaveStatus.Text = "";
+
             // Set the 'API Key' label text depending on whether the environment variable for the API Key already exists.
-            if(Environment.GetEnvironmentVariable(Randee.API_KEY) == null)
+            if(Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) == null)
             {
                 labelAPIKey.Text = "Enter a Random.org API key!";
                 labelAPIKey.Location = new Point(80, 43); // Empirically acquired
@@ -79,12 +81,19 @@ namespace Randee
         {
             if(IsInputValid(textboxAPIKey.Text))
             {
-                Environment.SetEnvironmentVariable(Randee.API_KEY, textboxAPIKey.Text);
+                // Sets the environment variable
+                Environment.SetEnvironmentVariable(Randee.API_KEY, textboxAPIKey.Text, EnvironmentVariableTarget.User); 
+
+                labelSaveStatus.Location = new Point(115, 124); // Empirically acquired
+                labelSaveStatus.ForeColor = Color.Black;
+                labelSaveStatus.Text = "Key successfully saved!";
+
                 return;
             }
 
-            textboxAPIKey.ForeColor = Color.Red;
-            textboxAPIKey.Text = "Invalid key detected! Please check your key and try again!";
+            labelSaveStatus.Location = new Point(60, 114); // Empirically acquired
+            labelSaveStatus.ForeColor = Color.Red;
+            labelSaveStatus.Text = "Invalid key!\r\nOnly letters, digits and hyphens (-) allowed!";
         }
 
 
@@ -95,8 +104,6 @@ namespace Randee
          */
         private bool IsInputValid(string givenInput)
         {
-            string userInput = givenInput;
-
             foreach (char character in givenInput)
             {
 

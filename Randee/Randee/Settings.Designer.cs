@@ -31,6 +31,7 @@
             this.labelAPIKey = new System.Windows.Forms.Label();
             this.textboxAPIKey = new System.Windows.Forms.TextBox();
             this.buttonSaveKey = new System.Windows.Forms.Button();
+            this.labelSaveStatus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelAPIKey
@@ -58,7 +59,7 @@
             // 
             // buttonSaveKey
             // 
-            this.buttonSaveKey.Location = new System.Drawing.Point(165, 118);
+            this.buttonSaveKey.Location = new System.Drawing.Point(164, 164);
             this.buttonSaveKey.Name = "buttonSaveKey";
             this.buttonSaveKey.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveKey.TabIndex = 2;
@@ -66,11 +67,23 @@
             this.buttonSaveKey.UseVisualStyleBackColor = true;
             this.buttonSaveKey.Click += new System.EventHandler(this.buttonSaveKey_Click);
             // 
+            // labelSaveStatus
+            // 
+            this.labelSaveStatus.AutoSize = true;
+            this.labelSaveStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.labelSaveStatus.Location = new System.Drawing.Point(115, 124);
+            this.labelSaveStatus.Name = "labelSaveStatus";
+            this.labelSaveStatus.Size = new System.Drawing.Size(139, 20);
+            this.labelSaveStatus.TabIndex = 3;
+            this.labelSaveStatus.Text = "Save Status Label";
+            this.labelSaveStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 420);
+            this.Controls.Add(this.labelSaveStatus);
             this.Controls.Add(this.buttonSaveKey);
             this.Controls.Add(this.textboxAPIKey);
             this.Controls.Add(this.labelAPIKey);
@@ -89,5 +102,6 @@
         private System.Windows.Forms.Label labelAPIKey;
         private System.Windows.Forms.TextBox textboxAPIKey;
         private System.Windows.Forms.Button buttonSaveKey;
+        private System.Windows.Forms.Label labelSaveStatus;
     }
 }
