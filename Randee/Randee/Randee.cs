@@ -144,7 +144,7 @@ namespace Randee
 
             /* No current settings detected */
             // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
-            settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable(API_KEY) == null ? "0" : "1") + "\r\n";
+            settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable(API_KEY, EnvironmentVariableTarget.User) == null ? "0" : "1") + "\r\n";
 
             // Create a 'settings.txt' file that stores the users settings
             using (FileStream fileStream = File.Create(settingsPath))
