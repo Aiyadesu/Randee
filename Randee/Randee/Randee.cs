@@ -24,8 +24,15 @@ namespace Randee
         public const string API_KEY = "RANDOM_ORG_API";
 
         /* Settings */
+        public const string SETTINGS_ON = "1";
+        public const string SETTINGS_OFF = "0";
+
+        public const string SETTINGS_KEY = "RANDOM_ORG_API = ";
+
+
         private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
         private string settings;
+
 
         /* Externally implemented functions (i.e from 'user32.dll') */
         [DllImport("user32.dll")] 
@@ -127,11 +134,12 @@ namespace Randee
 
 
         /* Main Functions */
-        /* 
-         * Creates a file to store settings called 'settings.txt'.
-         * Pre-condition: Check that there is no existing 'settings.txt' file.
-         * Post-condition: A 'settings.txt' file will be created in the directory that the application executable is in.
-         */
+
+
+
+        /// <summary>
+        /// Creates a file to store settings in text format ('settings.txt').
+        /// </summary>
         private void CreateSettingsFile()
         {
             // Used to store the settings
@@ -150,11 +158,10 @@ namespace Randee
 
 
 
-        /*
-         * Reads the settings file called 'settings.txt'.
-         * Pre-condition: Check that there is an existing 'settings.txt' file.
-         * Post-condition: A string will be returned with the contents of the 'settings.txt' file.
-         */
+        /// <summary>
+        /// Reads the settings text file ('settings.txt').
+        /// </summary>
+        /// <returns>A string with the contents of the settings file.</returns>
         private string ReadSettingsFile()
         {
             string settings = "";
@@ -173,6 +180,26 @@ namespace Randee
             }
 
             return settings;
+        }
+
+
+        /// <summary>
+        /// Updates the settings text file ('settings.txt') with the provided changes.
+        /// </summary>
+        /// 
+        /// <param name="settingChanges">
+        /// A string containing the required changes for the settings file. 
+        /// 
+        /// Example: "RANDOM_ORG_API = 0";
+        /// This string indicates that the user environment variable for the API Key does not exist anymore.
+        /// </param>
+        public void UpdateSettings(string settingChanges)
+        {
+            int count = settingChanges.Length;
+            int startIndex = settings.LastIndexOf(settingChanges.Substring(0, count - 1)); // Finds the index of the setting being updated
+
+            settings = settings.Remove(startIndex, count); // Removes the current setting
+            settings = settings.Insert(startIndex, settingChanges); // Inserts the requested change
         }
     }
 }
