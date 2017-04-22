@@ -20,9 +20,12 @@ namespace Randee
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HT_CAPTION = 0x2;
 
+        /* Used for setting and getting user environment variable */
         public const string API_KEY = "RANDOM_ORG_API";
 
-        private string appDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+        /* Settings */
+        private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
+        private string settings;
 
         /* Externally implemented functions (i.e from 'user32.dll') */
         [DllImport("user32.dll")] 
@@ -37,11 +40,19 @@ namespace Randee
         public Randee()
         {
             InitializeComponent();
-            CreateSettingsFile();
+
+            // Check if settings are already set
+            if (!File.Exists(settingsPath))
+            {
+                CreateSettingsFile();
+            }
+
+            settings = ReadSettingsFile();
         }
 
 
 
+        /* Event Handlers */
         private void Randee_Load(object sender, EventArgs e)
         {
 
@@ -105,44 +116,27 @@ namespace Randee
 
 
 
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            Settings settingsForm = new Settings();
+
+            settingsForm.Location = Location;
+
+            settingsForm.Show(this);
+        }
+
+
+        /* Main Functions */
         /* 
-         * Creates a file to store settings if there is no settings currently set, otherwise read from the current settings
-         * Source: https://msdn.microsoft.com/en-us/library/d62kzs03(v=vs.110).aspx
+         * Creates a file to store settings called 'settings.txt'.
+         * Pre-condition: Check that there is no existing 'settings.txt' file.
+         * Post-condition: A 'settings.txt' file will be created in the directory that the application executable is in.
          */
         private void CreateSettingsFile()
         {
-            // The path to create or find the settings file
-            string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
-
             // Used to store the settings
             string settings = "";
 
-            /* Current settings already exist */
-            // Check if settings are already set
-            if(File.Exists(settingsPath))
-            {
-
-                // Open the 'settings.txt' file and then store the contents of the file in a string
-                using (StreamReader streamReader = File.OpenText(settingsPath))
-                {
-
-                    string currentLine = "";
-                    settings = "";
-
-                    while ((currentLine = streamReader.ReadLine()) != null)
-                    {
-                        settings += currentLine;
-                    }
-
-                }
-
-                return;
-
-            }
-
-
-
-            /* No current settings detected */
             // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
             settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable(API_KEY, EnvironmentVariableTarget.User) == null ? "0" : "1") + "\r\n";
 
@@ -154,13 +148,31 @@ namespace Randee
             }
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
+
+
+        /*
+         * Reads the settings file called 'settings.txt'.
+         * Pre-condition: Check that there is an existing 'settings.txt' file.
+         * Post-condition: A string will be returned with the contents of the 'settings.txt' file.
+         */
+        private string ReadSettingsFile()
         {
-            Settings settingsForm = new Settings();
+            string settings = "";
 
-            settingsForm.Location = Location;
+            // Open the 'settings.txt' file and then store the contents of the file in a string
+            using (StreamReader streamReader = File.OpenText(settingsPath))
+            {
 
-            settingsForm.Show(this);
+                string currentLine = "";
+
+                while ((currentLine = streamReader.ReadLine()) != null)
+                {
+                    settings += currentLine;
+                }
+
+            }
+
+            return settings;
         }
     }
 }
