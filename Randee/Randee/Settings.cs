@@ -98,21 +98,6 @@ namespace Randee
 
 
         /// <summary>
-        /// Convenience function to write to the 'settings.txt' file.
-        /// "Writes a block of bytes to the file stream".
-        /// </summary>
-        private void WriteToSettingsFile(string settings)
-        {
-            using (FileStream fileStream = File.Create(settingsPath))
-            {
-                Byte[] settingsData = new UTF8Encoding(true).GetBytes(settings);
-                fileStream.Write(settingsData, 0, settingsData.Length);
-            }
-        }
-
-
-
-        /// <summary>
         /// Creates a file to store settings in text format ('settings.txt').
         /// </summary>
         private void CreateSettingsFile()
@@ -177,22 +162,6 @@ namespace Randee
         }
 
 
-        /// <summary>
-        /// Changes the position, colour and text of the 'Save Status' label.
-        /// </summary>
-        /// 
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="colour"></param>
-        /// <param name="labelText"></param>
-        private void ChangeSaveStatusLabel(int x, int y, Color colour, string labelText)
-        {
-            labelSaveStatus.Location = new Point(x, y);
-            labelSaveStatus.ForeColor = colour;
-            labelSaveStatus.Text = labelText;
-        }
-
-
 
         /// <summary>
         /// Sets an environment variable which contains the Random.org API key.
@@ -232,10 +201,6 @@ namespace Randee
 
 
 
-        /* Validates the API Key.
-         * Returns true if the key contains only letters, digits and the hyphen (-) symbol.
-         * Otherwise, returns false.
-         */
         /// <summary>
         /// Validates the input provided for the 'TextboxAPIKey'.
         /// </summary>
@@ -264,6 +229,42 @@ namespace Randee
             }
 
             return true;
+        }
+
+
+
+        /* Convenience Functions */
+
+
+
+        /// <summary>
+        /// Changes the position, colour and text of the 'Save Status' label.
+        /// </summary>
+        /// 
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="colour"></param>
+        /// <param name="labelText"></param>
+        private void ChangeSaveStatusLabel(int x, int y, Color colour, string labelText)
+        {
+            labelSaveStatus.Location = new Point(x, y);
+            labelSaveStatus.ForeColor = colour;
+            labelSaveStatus.Text = labelText;
+        }
+
+
+
+        /// <summary>
+        /// Convenience function to write to the 'settings.txt' file.
+        /// "Writes a block of bytes to the file stream".
+        /// </summary>
+        private void WriteToSettingsFile(string settings)
+        {
+            using (FileStream fileStream = File.Create(settingsPath))
+            {
+                Byte[] settingsData = new UTF8Encoding(true).GetBytes(settings);
+                fileStream.Write(settingsData, 0, settingsData.Length);
+            }
         }
     }
 }

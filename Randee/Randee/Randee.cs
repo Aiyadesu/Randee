@@ -38,9 +38,6 @@ namespace Randee
         public Randee()
         {
             InitializeComponent();
-
-
-
         }
 
 
