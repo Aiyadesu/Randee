@@ -23,7 +23,6 @@ namespace Randee
         /* Class Members */
         private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
 
-        private bool apiKeySet;
         private bool keepHistory;
 
 
