@@ -15,12 +15,16 @@ namespace Randee
     {
         /* Class Constants */
         private const string SETTINGS_API_KEY = "RANDOM_ORG_API = ";
+        private const string SETTINGS_HISTORY = "NUMBER_HISTORY = ";
 
-        private const string SETTINGS_OFF = "0";
-        private const string SETTINGS_ON = "1";
+        private const char SETTINGS_OFF = '0';
+        private const char SETTINGS_ON = '1';
 
         /* Class Members */
         private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
+
+        private bool apiKeySet;
+        private bool keepHistory;
 
 
 
@@ -30,18 +34,10 @@ namespace Randee
 
 
 
-            /* Create the 'settings.txt' if it does not already exist */
-            if (!File.Exists(settingsPath))
-            {
-                CreateSettingsFile();
-            }
-
-
-
             /* Prepare the labels based on whether the user environment variable for the API Key exists */
             labelSaveStatus.Text = "";
 
-            if(Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) == null)
+            if(!IsAPIKeySet())
             {
                 labelAPIKey.Text = "Enter a Random.org API key!";
                 labelAPIKey.Location = new Point(80, 43); // Empirically acquired
@@ -51,6 +47,16 @@ namespace Randee
 
             labelAPIKey.Text = "Overwrite your current API key?";
             labelAPIKey.Location = new Point(69, 43); // Empirically acquired
+
+
+
+            /* Create the 'settings.txt' if it does not already exist */
+            if (!File.Exists(settingsPath))
+            {
+                CreateSettingsFile();
+            }
+
+            ReadSettingsFile();
         }
 
 
@@ -103,7 +109,8 @@ namespace Randee
         private void CreateSettingsFile()
         {
             // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
-            string settings = "RANDOM_ORG_API = " + (Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) == null ? "0" : "1") + "\r\n";
+            string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_OFF : SETTINGS_ON) + "\r\n" 
+                            + SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n";
 
             WriteToSettingsFile(settings);
         }
@@ -126,7 +133,16 @@ namespace Randee
 
                 while ((currentLine = streamReader.ReadLine()) != null)
                 {
+                    // Store the current line
                     settings += currentLine;
+
+                    /* Set the members based on the previous settings */
+                    // Retrives the previous settings for whether or not to keep a history or generated numbers
+                    if(currentLine.Contains(SETTINGS_HISTORY))
+                    {
+                        SetKeepHistory(settings[settings.Length - 1] == SETTINGS_ON);
+                        continue;
+                    }
                 }
 
             }
@@ -238,6 +254,20 @@ namespace Randee
 
 
         /// <summary>
+        /// Checks whether the API Key is set as user environment variable.
+        /// </summary>
+        /// <returns>
+        /// True, if the key is set as an environment variable. 
+        /// False, otherwise.
+        /// </returns>
+        private bool IsAPIKeySet()
+        {
+            return Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) == null;
+        }
+
+
+
+        /// <summary>
         /// Changes the position, colour and text of the 'Save Status' label.
         /// </summary>
         /// 
@@ -265,6 +295,22 @@ namespace Randee
                 Byte[] settingsData = new UTF8Encoding(true).GetBytes(settings);
                 fileStream.Write(settingsData, 0, settingsData.Length);
             }
+        }
+
+
+
+        /* Getters & Setters */
+
+
+
+        public bool GetKeepHistory()
+        {
+            return keepHistory;
+        }
+
+        public void SetKeepHistory(bool keepHistory)
+        {
+            this.keepHistory = keepHistory;
         }
     }
 }
