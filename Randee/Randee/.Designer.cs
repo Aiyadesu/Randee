@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Randee));
             this.generateNumber = new System.Windows.Forms.Button();
             this.maxRangeInput = new System.Windows.Forms.NumericUpDown();
             this.numberDisplay = new System.Windows.Forms.Label();
@@ -36,8 +37,10 @@
             this.minRangeInput = new System.Windows.Forms.NumericUpDown();
             this.toLabel = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             this.SuspendLayout();
             // 
             // generateNumber
@@ -133,19 +136,31 @@
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(226, 99);
+            this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.settingsButton.Location = new System.Drawing.Point(157, 237);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(75, 23);
+            this.settingsButton.Size = new System.Drawing.Size(115, 33);
             this.settingsButton.TabIndex = 9;
-            this.settingsButton.Text = "settingsButton";
+            this.settingsButton.Text = "Settings";
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonClose.BackgroundImage")));
+            this.buttonClose.Location = new System.Drawing.Point(379, -1);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(42, 42);
+            this.buttonClose.TabIndex = 10;
+            this.buttonClose.TabStop = false;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 420);
+            this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.toLabel);
             this.Controls.Add(this.minRangeInput);
@@ -162,6 +177,7 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Randee_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -176,6 +192,7 @@
         private System.Windows.Forms.Label fromLabel;
         private System.Windows.Forms.Label toLabel;
         private System.Windows.Forms.Button settingsButton;
+        private System.Windows.Forms.PictureBox buttonClose;
     }
 }
 

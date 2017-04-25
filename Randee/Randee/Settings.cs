@@ -24,6 +24,7 @@ namespace Randee
         private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
 
         private bool keepHistory;
+        private string seperator;
 
 
 
@@ -33,19 +34,14 @@ namespace Randee
 
 
 
+            /* Initialise class members */
+            seperator = " "; 
+           // keepHistory = false; 
+
+
+
             /* Prepare the labels based on whether the user environment variable for the API Key exists */
             labelSaveStatus.Text = "";
-
-            if(!IsAPIKeySet())
-            {
-                labelAPIKey.Text = "Enter a Random.org API key!";
-                labelAPIKey.Location = new Point(80, 43); // Empirically acquired
-
-                return;
-            }
-
-            labelAPIKey.Text = "Overwrite your current API key?";
-            labelAPIKey.Location = new Point(69, 43); // Empirically acquired
 
 
 
@@ -56,6 +52,22 @@ namespace Randee
             }
 
             ReadSettingsFile();
+
+
+
+            /* Setup the GUI */
+            checkBoxKeepHistory.Checked = keepHistory;
+
+            if (!IsAPIKeySet())
+            {
+                labelAPIKey.Text = "Enter a Random.org API key!";
+                labelAPIKey.Location = new Point(80, 43); // Empirically acquired
+
+                return;
+            }
+
+            labelAPIKey.Text = "Overwrite your current API key?";
+            labelAPIKey.Location = new Point(69, 43); // Empirically acquired
         }
 
 
@@ -94,6 +106,37 @@ namespace Randee
         private void buttonSaveKey_Click(object sender, EventArgs e)
         {
             SaveKey();
+        }
+
+
+
+        // Updates the 'keepHistory' field based on the user preference
+        private void checkBoxKeepHistory_CheckedChanged(object sender, EventArgs e)
+        {
+            SetKeepHistory(checkBoxKeepHistory.Checked);
+
+            labelSeperator.Visible = keepHistory;
+            comboBoxSeperator.Visible = keepHistory;
+            labelSeperatorExample.Visible = keepHistory;
+
+            UpdateSettings(SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF));
+        }
+
+
+
+
+        private void comboBoxSeperator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetSeperator(comboBoxSeperator.Text);
+
+            labelSeperatorExample.Text = "Example Output) 1" + seperator + "2" + seperator + "3" + seperator + "4.";
+        }
+
+
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
 
 
@@ -310,6 +353,16 @@ namespace Randee
         public void SetKeepHistory(bool keepHistory)
         {
             this.keepHistory = keepHistory;
+        }
+
+        public string GetSeperator()
+        {
+            return seperator;
+        }
+
+        public void SetSeperator(string seperator)
+        {
+            this.seperator = seperator;
         }
     }
 }

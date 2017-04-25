@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Randee
 {
@@ -22,6 +23,11 @@ namespace Randee
 
         /* Other Pages/Forms */
         private Settings settingsForm = new Settings();
+
+        /* Randee Members */
+        private string historyPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\history.txt";
+        private string dateTimeAppOpened = "Numbers generated history from: " + DateTime.Now.ToString() + "\r\n";
+        private string generatedNumbers;
 
 
 
@@ -38,6 +44,8 @@ namespace Randee
         public Randee()
         {
             InitializeComponent();
+
+            Console.WriteLine(dateTimeAppOpened);
         }
 
 
@@ -62,7 +70,13 @@ namespace Randee
         {
             if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
             {
-                numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+                string number = ShuffleHeaven.GenerateNumber((int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+
+                numberDisplay.Text = "Your random number is " + number;
+
+                AddToLog(number);
+
+                Console.WriteLine("Current log is: " + generatedNumbers);
                 /* The called function is commented out */
                 //ShuffleHeaven.GetTrueRandomNumber(10, (int)minRangeInput.Value, (int)maxRangeInput.Value);
             }
@@ -111,6 +125,64 @@ namespace Randee
             settingsForm.Location = Location;
 
             settingsForm.Show(this);
+        }
+
+
+
+        /* 
+         * Closes the application.
+         * Add "clean up" code here!
+         */
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            OutputLogFile();
+
+            Application.Exit();
+        }
+
+
+
+        /* Main Functions */
+        private void AddToLog(string number)
+        {
+            generatedNumbers += number + settingsForm.GetSeperator();
+        }
+
+
+
+        /// <summary>
+        /// Outputs the history of generated numbers by "session". 
+        /// i.e Everytime the application is closed a "session" is ended.
+        /// </summary>
+        private void OutputLogFile()
+        {
+            string history = dateTimeAppOpened + generatedNumbers;
+
+
+
+            if(!settingsForm.GetKeepHistory())
+            {
+                return;
+            }
+
+
+
+            if(!File.Exists(historyPath))
+            {
+                using (FileStream fileStream = File.Create(historyPath))
+                {
+                    Byte[] historyData = new UTF8Encoding(true).GetBytes(history + "\r\n\r\n");
+                    fileStream.Write(historyData, 0, historyData.Length);
+                }
+                return;
+            }
+
+
+
+            using (StreamWriter streamWriter = File.AppendText(historyPath))
+            {
+                streamWriter.WriteLine(history + "\r\n\r\n");
+            }
         }
     }
 }
