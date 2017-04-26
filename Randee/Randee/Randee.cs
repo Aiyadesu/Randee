@@ -69,16 +69,12 @@ namespace Randee
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
             {
-                if(numberOfNumbers.Value > 1)
-                {
-                    numberDisplay.Text = "Your random numbers are: ";
-                    labelMultipleNumbers.Text = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
+                string number = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
 
-                    return;
-                }
+                numberDisplay.Text = numberOfNumbers.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
+                labelMultipleNumbers.Text = numberOfNumbers.Value > 1 ? number : "";
 
-                labelMultipleNumbers.Text = "";
-                numberDisplay.Text = "Your random number is: " + ShuffleHeaven.GetTrueRandomNumber((int) numberOfNumbers.Value, (int) minRangeInput.Value, (int) maxRangeInput.Value);
+                AddToLog(number);
 
                 return;
             }
