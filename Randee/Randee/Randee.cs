@@ -44,8 +44,6 @@ namespace Randee
         public Randee()
         {
             InitializeComponent();
-
-            Console.WriteLine(dateTimeAppOpened);
         }
 
 
