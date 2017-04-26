@@ -22,9 +22,7 @@ namespace Randee
         private static int advisoryDelay;
 
         private static string numbers;
-        private static int[] test;
         
-
 
 
         /* Default Constructor */
