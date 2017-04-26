@@ -66,21 +66,34 @@ namespace Randee
         // The main event function to be called
         private void generateNumber_Click(object sender, EventArgs e)
         {
+            /* Generates a true random number */
+            if(settingsForm.IsAPIKeySet())
+            {
+                if(numberOfNumbers.Value > 1)
+                {
+                    numberDisplay.Text = "Your random numbers are: ";
+                    labelMultipleNumbers.Text = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
+
+                    return;
+                }
+
+                labelMultipleNumbers.Text = "";
+                numberDisplay.Text = "Your random number is: " + ShuffleHeaven.GetTrueRandomNumber((int) numberOfNumbers.Value, (int) minRangeInput.Value, (int) maxRangeInput.Value);
+
+                return;
+            }
+
+
+
+            /* Generates a pseudo random number */
             if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
             {
-                string number = ShuffleHeaven.GenerateNumber((int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+                string number = ShuffleHeaven.GenerateNumber((int) numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
 
-                numberDisplay.Text = "Your random number is " + number;
+                numberDisplay.Text = numberOfNumbers.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
+                labelMultipleNumbers.Text = numberOfNumbers.Value > 1 ? number : "";
 
                 AddToLog(number);
-
-                Console.WriteLine("Current log is: " + generatedNumbers);
-                /* The called function is commented out */
-                //ShuffleHeaven.GetTrueRandomNumber(10, (int)minRangeInput.Value, (int)maxRangeInput.Value);
-            }
-            else
-            {
-                numberDisplay.Text = "Your random number is " + ShuffleHeaven.GenerateNumber((byte)minRangeInput.Value, (byte)maxRangeInput.Value).ToString();
             }
         }
 
