@@ -152,7 +152,7 @@ namespace Randee
         /* Main Functions */
         private void AddToLog(string number)
         {
-            generatedNumbers += number + settingsForm.GetSeperator();
+            generatedNumbers += number + settingsForm.GetSeperator() + "\r\n";
         }
 
 
