@@ -190,6 +190,7 @@
             this.labelMultipleNumbers.Name = "labelMultipleNumbers";
             this.labelMultipleNumbers.Size = new System.Drawing.Size(371, 86);
             this.labelMultipleNumbers.TabIndex = 13;
+            this.labelMultipleNumbers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Randee
             // 

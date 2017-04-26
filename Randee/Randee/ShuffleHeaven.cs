@@ -17,11 +17,14 @@ namespace Randee
         private static WebClient webClient              = new WebClient();
 
         /* Random.org Information */
-        private static int bitsLeft;
-        private static int requestsLeft;
-        private static int advisoryDelay;
+        private static int bitsLeft = 250000;
+        private static int requestsLeft = 1000;
+        private static int advisoryDelay = 1000;
 
         private static string numbers;
+        private static DateTime sessionStartTime = DateTime.Now.ToUniversalTime();
+        private static DateTime advisedRequestTime;
+        private static DateTime defaultDateTime;
         
 
 
@@ -169,7 +172,7 @@ namespace Randee
         /// Guidelines: (https://api.random.org/guidelines)
         /// 1) If possible, do not issue multiple simultaneous requests (Doesn't matter if client is single-threaded).
         /// 2) Fetch numbers in blocks as large as possible, this is more efficient than issuing a separate request for every single number.
-        /// 3) If the  client is not a real-time application, use a long timeout value for your requests, ideally a couple of minutes.
+        /// 3) If the client is not a real-time application, use a long timeout value for your requests, ideally a couple of minutes.
         /// 4) If the daily request or bit limit is exceeded, the client must back off until midnight UTC. Random.org will respond with a
         ///    402 or 403 error code, if your API key does not have enough requests or bits left. Your key's current usage is included in nearly all API
         ///    responses, so the client can easily track how many of each it has left.
@@ -180,6 +183,17 @@ namespace Randee
         /// <param name="maxRange"></param>
         public static string GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
+            if(DateTime.Now.ToUniversalTime().Day > sessionStartTime.Day)
+            {
+                SetRequestsLeft(1000);
+                SetBitsLeft(250000);
+            }
+
+            if (GetRequestsLeft() == 0) return GenerateNumber(numberOfNumbers, minRange, maxRange);
+            if (GetBitsLeft() <= 0) return GenerateNumber(numberOfNumbers, minRange, maxRange);
+            if (GetAdvisedRequestTime() != defaultDateTime && DateTime.Now.ToUniversalTime() < GetAdvisedRequestTime()) return GenerateNumber(numberOfNumbers, minRange, maxRange);
+
+           
             string requestID = "1414";
 
             string response = webClient.UploadString("https://api.random.org/json-rpc/1/invoke", 
@@ -233,6 +247,8 @@ namespace Randee
             bitsLeft = Int32.Parse(bitsLeftStr.Substring(bitsLeftStr.IndexOf(":") + 1));
             requestsLeft = Int32.Parse(requestsLeftStr.Substring(requestsLeftStr.IndexOf(":") + 1));
             advisoryDelay = Int32.Parse(advisoryDelayStr.Substring(advisoryDelayStr.IndexOf(":") + 1));
+
+            SetAdvisedRequestTime();
         }
 
 
@@ -266,6 +282,16 @@ namespace Randee
         private static void SetAdvisoryDelay(int advisedDelay)
         {
             advisoryDelay = advisedDelay;
+        }
+
+        private static DateTime GetAdvisedRequestTime()
+        {
+            return advisedRequestTime;
+        }
+
+        private static void SetAdvisedRequestTime()
+        {
+            advisedRequestTime = DateTime.Now.ToUniversalTime().AddMilliseconds(advisoryDelay);
         }
     }
 }
