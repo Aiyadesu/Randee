@@ -302,9 +302,9 @@ namespace Randee
         /// True, if the key is set as an environment variable. 
         /// False, otherwise.
         /// </returns>
-        private bool IsAPIKeySet()
+        public bool IsAPIKeySet()
         {
-            return Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) == null;
+            return Environment.GetEnvironmentVariable(Randee.API_KEY, EnvironmentVariableTarget.User) != null;
         }
 
 
