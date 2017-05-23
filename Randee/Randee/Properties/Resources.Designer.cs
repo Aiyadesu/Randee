@@ -63,9 +63,19 @@ namespace Randee.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap close_button {
+        internal static System.Drawing.Bitmap close_button_c0c0c0 {
             get {
-                object obj = ResourceManager.GetObject("close_button", resourceCulture);
+                object obj = ResourceManager.GetObject("close_button_c0c0c0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap close_button_FFFFFF {
+            get {
+                object obj = ResourceManager.GetObject("close_button_FFFFFF", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

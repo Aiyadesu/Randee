@@ -41,10 +41,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numberOfNumbers = new System.Windows.Forms.NumericUpDown();
             this.labelMultipleNumbers = new System.Windows.Forms.Label();
+            this.windowMask = new System.Windows.Forms.PictureBox();
+            this.titleText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfNumbers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.windowMask)).BeginInit();
             this.SuspendLayout();
             // 
             // generateNumber
@@ -76,18 +79,17 @@
             0,
             0,
             0});
-            this.maxRangeInput.ValueChanged += new System.EventHandler(this.rangeInput_ValueChanged);
             // 
             // numberDisplay
             // 
             this.numberDisplay.AutoSize = true;
             this.numberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numberDisplay.ForeColor = System.Drawing.SystemColors.ControlText;
             this.numberDisplay.Location = new System.Drawing.Point(98, 277);
             this.numberDisplay.Name = "numberDisplay";
             this.numberDisplay.Size = new System.Drawing.Size(234, 24);
             this.numberDisplay.TabIndex = 4;
             this.numberDisplay.Text = "Your random number is 14";
-            this.numberDisplay.Click += new System.EventHandler(this.numberDisplay_Click);
             // 
             // customRangeLabel
             // 
@@ -126,7 +128,6 @@
             0,
             0,
             0});
-            this.minRangeInput.ValueChanged += new System.EventHandler(this.minRangeInput_ValueChanged);
             // 
             // toLabel
             // 
@@ -141,7 +142,7 @@
             // settingsButton
             // 
             this.settingsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.settingsButton.Location = new System.Drawing.Point(12, 12);
+            this.settingsButton.Location = new System.Drawing.Point(562, 209);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(115, 33);
             this.settingsButton.TabIndex = 9;
@@ -152,12 +153,14 @@
             // buttonClose
             // 
             this.buttonClose.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonClose.BackgroundImage")));
-            this.buttonClose.Location = new System.Drawing.Point(379, -1);
+            this.buttonClose.Location = new System.Drawing.Point(799, -1);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(42, 42);
             this.buttonClose.TabIndex = 10;
             this.buttonClose.TabStop = false;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.MouseLeave += new System.EventHandler(this.buttonClose_Leave);
+            this.buttonClose.MouseHover += new System.EventHandler(this.buttonClose_MouseOver);
             // 
             // label1
             // 
@@ -192,11 +195,32 @@
             this.labelMultipleNumbers.TabIndex = 13;
             this.labelMultipleNumbers.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // windowMask
+            // 
+            this.windowMask.Location = new System.Drawing.Point(0, 42);
+            this.windowMask.Name = "windowMask";
+            this.windowMask.Size = new System.Drawing.Size(840, 431);
+            this.windowMask.TabIndex = 14;
+            this.windowMask.TabStop = false;
+            // 
+            // titleText
+            // 
+            this.titleText.AutoSize = true;
+            this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.titleText.Location = new System.Drawing.Point(13, 13);
+            this.titleText.Name = "titleText";
+            this.titleText.Size = new System.Drawing.Size(82, 24);
+            this.titleText.TabIndex = 15;
+            this.titleText.Text = "Randee ";
+            // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 420);
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.ClientSize = new System.Drawing.Size(840, 473);
+            this.Controls.Add(this.titleText);
             this.Controls.Add(this.labelMultipleNumbers);
             this.Controls.Add(this.numberOfNumbers);
             this.Controls.Add(this.label1);
@@ -209,16 +233,18 @@
             this.Controls.Add(this.numberDisplay);
             this.Controls.Add(this.maxRangeInput);
             this.Controls.Add(this.generateNumber);
+            this.Controls.Add(this.windowMask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Randee";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Randee";
-            this.Load += new System.EventHandler(this.Randee_Load);
+            this.LocationChanged += new System.EventHandler(this.Randee_LocationChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Randee_MouseDown);
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfNumbers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.windowMask)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,6 +263,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numberOfNumbers;
         private System.Windows.Forms.Label labelMultipleNumbers;
+        private System.Windows.Forms.PictureBox windowMask;
+        private System.Windows.Forms.Label titleText;
     }
 }
 

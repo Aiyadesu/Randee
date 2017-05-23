@@ -29,6 +29,10 @@ namespace Randee
         private string dateTimeAppOpened = "Numbers generated history from: " + DateTime.Now.ToString() + "\r\n";
         private string generatedNumbers;
 
+        /* Colours */
+        private static Color TITLE_BAR_BACK_COLOUR = Color.FromArgb(64, 64, 64);
+        private static Color WINDOW_BACK_COLOUR = Color.FromArgb(128, 128, 128);
+
 
 
         /* Externally implemented functions (i.e from 'user32.dll') */
@@ -44,28 +48,23 @@ namespace Randee
         public Randee()
         {
             InitializeComponent();
+
+            BackColor = TITLE_BAR_BACK_COLOUR;
+
+            numberDisplay.ForeColor = Color.FromArgb(192, 192, 192);
         }
 
 
 
         /* Event Handlers */
-        private void Randee_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void titleBar_Click(object sender, EventArgs e)
-        {
-
-        }
 
 
 
         // The main event function to be called
         private void generateNumber_Click(object sender, EventArgs e)
         {
+            generateNumber.Enabled = false; // Lock the button
+
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
             {
@@ -75,6 +74,8 @@ namespace Randee
                 labelMultipleNumbers.Text = numberOfNumbers.Value > 1 ? number : "";
 
                 AddToLog(number);
+
+                generateNumber.Enabled = true; // Unlock the button
 
                 return;
             }
@@ -91,27 +92,8 @@ namespace Randee
 
                 AddToLog(number);
             }
-        }
 
-
-
-        private void rangeInput_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void numberDisplay_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void minRangeInput_ValueChanged(object sender, EventArgs e)
-        {
-
+            generateNumber.Enabled = true; // Unlock the button
         }
 
 
@@ -129,9 +111,42 @@ namespace Randee
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            settingsForm.Location = Location;
+            settingsForm.BackColor = BackColor;
 
-            settingsForm.Show(this);
+            Point window = Location;
+            window.Offset(0, 42);
+
+            settingsForm.Location = window;
+            //settingsForm.Size = windowMask.Size;
+
+            if(!settingsForm.Visible)
+            {
+                settingsForm.Show(this);
+            }
+        }
+
+
+
+        private void Randee_LocationChanged(object sender, EventArgs e)
+        {
+            Point window = Location;
+            window.Offset(0, 42);
+
+            settingsForm.Location = window;
+        }
+
+
+
+        private void buttonClose_MouseOver(object sender, EventArgs e)
+        {
+            buttonClose.BackgroundImage = Properties.Resources.close_button_FFFFFF;
+        }
+
+
+
+        private void buttonClose_Leave(object sender, EventArgs e)
+        {
+            buttonClose.BackgroundImage = Properties.Resources.close_button_c0c0c0;
         }
 
 
