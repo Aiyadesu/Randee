@@ -32,6 +32,9 @@ namespace Randee
         /* Colours */
         private static Color TITLE_BAR_BACK_COLOUR = Color.FromArgb(64, 64, 64);
         private static Color WINDOW_BACK_COLOUR = Color.FromArgb(128, 128, 128);
+        private static Color TEXT_COLOUR = Color.FromArgb(230, 230, 230);
+        private static Color INPUT_COLOUR = Color.FromArgb(255, 255, 255);
+        private static Color RESULTS_COLOUR = Color.FromArgb(0, 153, 0);
 
 
 
@@ -49,9 +52,30 @@ namespace Randee
         {
             InitializeComponent();
 
+            /* Set the "dark" theme of the application */
             BackColor = TITLE_BAR_BACK_COLOUR;
 
-            numberDisplay.ForeColor = Color.FromArgb(192, 192, 192);
+            // Set the display colours
+            numberDisplay.ForeColor = TEXT_COLOUR;
+            titleText.ForeColor = TEXT_COLOUR;
+            customRangeLabel.ForeColor = TEXT_COLOUR;
+            fromLabel.ForeColor = TEXT_COLOUR;
+            toLabel.ForeColor = TEXT_COLOUR;
+            numberOfNumbersLabel.ForeColor = TEXT_COLOUR;
+
+            // Set the input colours
+            minRangeInput.BackColor = WINDOW_BACK_COLOUR;
+            minRangeInput.ForeColor = INPUT_COLOUR;
+
+            maxRangeInput.BackColor = WINDOW_BACK_COLOUR;
+            maxRangeInput.ForeColor = INPUT_COLOUR;
+
+            numberOfNumbersInput.BackColor = WINDOW_BACK_COLOUR;
+            numberOfNumbersInput.ForeColor = INPUT_COLOUR;
+
+            // Set the result colours
+            numberDisplay.ForeColor = RESULTS_COLOUR;
+            labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
         }
 
 
@@ -68,10 +92,10 @@ namespace Randee
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
             {
-                string number = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
+                string number = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbersInput.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
 
-                numberDisplay.Text = numberOfNumbers.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
-                labelMultipleNumbers.Text = numberOfNumbers.Value > 1 ? number : "";
+                numberDisplay.Text = numberOfNumbersInput.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
+                labelMultipleNumbers.Text = numberOfNumbersInput.Value > 1 ? number : "";
 
                 AddToLog(number);
 
@@ -85,10 +109,10 @@ namespace Randee
             /* Generates a pseudo random number */
             if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
             {
-                string number = ShuffleHeaven.GenerateNumber((int) numberOfNumbers.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+                string number = ShuffleHeaven.GenerateNumber((int) numberOfNumbersInput.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
 
-                numberDisplay.Text = numberOfNumbers.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
-                labelMultipleNumbers.Text = numberOfNumbers.Value > 1 ? number : "";
+                numberDisplay.Text = numberOfNumbersInput.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
+                labelMultipleNumbers.Text = numberOfNumbersInput.Value > 1 ? number : "";
 
                 AddToLog(number);
             }
@@ -117,7 +141,6 @@ namespace Randee
             window.Offset(0, 42);
 
             settingsForm.Location = window;
-            //settingsForm.Size = windowMask.Size;
 
             if(!settingsForm.Visible)
             {
@@ -147,6 +170,30 @@ namespace Randee
         private void buttonClose_Leave(object sender, EventArgs e)
         {
             buttonClose.BackgroundImage = Properties.Resources.close_button_c0c0c0;
+        }
+
+
+
+        private void buttonHome_Click(object sender, EventArgs e)
+        {
+            if(settingsForm.Visible)
+            {
+                settingsForm.Hide();
+            }
+        }
+
+
+
+        private void buttonHome_MouseOver(object sender, EventArgs e)
+        {
+            buttonHome.BackgroundImage = Properties.Resources.home_button_FFFFFFF;
+        }
+
+
+
+        private void buttonHome_Leave(object sender, EventArgs e)
+        {
+            buttonHome.BackgroundImage = Properties.Resources.home_button_c0c0c0;
         }
 
 
