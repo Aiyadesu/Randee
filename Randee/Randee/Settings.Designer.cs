@@ -36,7 +36,6 @@
             this.comboBoxSeperator = new System.Windows.Forms.ComboBox();
             this.labelSeperator = new System.Windows.Forms.Label();
             this.labelSeperatorExample = new System.Windows.Forms.Label();
-            this.buttonHome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelAPIKey
@@ -64,9 +63,10 @@
             // 
             // buttonSaveKey
             // 
+            this.buttonSaveKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.buttonSaveKey.Location = new System.Drawing.Point(164, 164);
             this.buttonSaveKey.Name = "buttonSaveKey";
-            this.buttonSaveKey.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveKey.Size = new System.Drawing.Size(75, 34);
             this.buttonSaveKey.TabIndex = 2;
             this.buttonSaveKey.Text = "Save Key";
             this.buttonSaveKey.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             // 
             this.labelSaveStatus.AutoSize = true;
             this.labelSaveStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.labelSaveStatus.Location = new System.Drawing.Point(115, 124);
+            this.labelSaveStatus.Location = new System.Drawing.Point(131, 125);
             this.labelSaveStatus.Name = "labelSaveStatus";
             this.labelSaveStatus.Size = new System.Drawing.Size(139, 20);
             this.labelSaveStatus.TabIndex = 3;
@@ -97,6 +97,7 @@
             // 
             // comboBoxSeperator
             // 
+            this.comboBoxSeperator.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.comboBoxSeperator.FormattingEnabled = true;
             this.comboBoxSeperator.Items.AddRange(new object[] {
             " ",
@@ -105,7 +106,7 @@
             this.comboBoxSeperator.Location = new System.Drawing.Point(261, 277);
             this.comboBoxSeperator.MaxDropDownItems = 3;
             this.comboBoxSeperator.Name = "comboBoxSeperator";
-            this.comboBoxSeperator.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxSeperator.Size = new System.Drawing.Size(121, 32);
             this.comboBoxSeperator.TabIndex = 1;
             this.comboBoxSeperator.Text = " ";
             this.comboBoxSeperator.Visible = false;
@@ -114,7 +115,7 @@
             // labelSeperator
             // 
             this.labelSeperator.AutoSize = true;
-            this.labelSeperator.Location = new System.Drawing.Point(42, 280);
+            this.labelSeperator.Location = new System.Drawing.Point(42, 288);
             this.labelSeperator.Name = "labelSeperator";
             this.labelSeperator.Size = new System.Drawing.Size(197, 13);
             this.labelSeperator.TabIndex = 6;
@@ -125,7 +126,7 @@
             // labelSeperatorExample
             // 
             this.labelSeperatorExample.AutoSize = true;
-            this.labelSeperatorExample.Location = new System.Drawing.Point(42, 305);
+            this.labelSeperatorExample.Location = new System.Drawing.Point(42, 344);
             this.labelSeperatorExample.Name = "labelSeperatorExample";
             this.labelSeperatorExample.Size = new System.Drawing.Size(124, 13);
             this.labelSeperatorExample.TabIndex = 7;
@@ -133,23 +134,11 @@
             this.labelSeperatorExample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelSeperatorExample.Visible = false;
             // 
-            // buttonHome
-            // 
-            this.buttonHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.buttonHome.Location = new System.Drawing.Point(164, 344);
-            this.buttonHome.Name = "buttonHome";
-            this.buttonHome.Size = new System.Drawing.Size(75, 32);
-            this.buttonHome.TabIndex = 8;
-            this.buttonHome.Text = "Home";
-            this.buttonHome.UseVisualStyleBackColor = true;
-            this.buttonHome.Click += new System.EventHandler(this.buttonHome_Click);
-            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(420, 431);
-            this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.labelSeperatorExample);
             this.Controls.Add(this.labelSeperator);
             this.Controls.Add(this.comboBoxSeperator);
@@ -163,6 +152,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,7 +167,6 @@
         private System.Windows.Forms.ComboBox comboBoxSeperator;
         private System.Windows.Forms.Label labelSeperator;
         private System.Windows.Forms.Label labelSeperatorExample;
-        private System.Windows.Forms.Button buttonHome;
         private System.Windows.Forms.CheckBox checkBoxKeepHistory;
     }
 }

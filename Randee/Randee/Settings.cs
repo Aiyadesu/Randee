@@ -33,6 +33,22 @@ namespace Randee
             InitializeComponent();
 
 
+            labelAPIKey.ForeColor = Randee.TEXT_COLOUR;
+            labelSaveStatus.ForeColor = Randee.TEXT_COLOUR;
+
+            
+            textboxAPIKey.BackColor = Randee.WINDOW_BACK_COLOUR;
+            textboxAPIKey.ForeColor = Randee.TEXT_COLOUR;
+
+            checkBoxKeepHistory.ForeColor = Randee.TEXT_COLOUR;
+            labelSeperator.ForeColor = Randee.TEXT_COLOUR;
+            labelSeperatorExample.ForeColor = Randee.TEXT_COLOUR;
+
+            comboBoxSeperator.BackColor = Randee.WINDOW_BACK_COLOUR;
+            comboBoxSeperator.ForeColor = Randee.INPUT_COLOUR;
+
+            buttonSaveKey.BackColor = Randee.WINDOW_BACK_COLOUR;
+            buttonSaveKey.ForeColor = Randee.INPUT_COLOUR;
 
             /* Initialise class members */
             seperator = " "; 
@@ -80,10 +96,9 @@ namespace Randee
         // Resets the text box colour
         private void textboxAPIKey_Enter(object sender, EventArgs e)
         {
-            textboxAPIKey.ForeColor = Color.Black;
             textboxAPIKey.Text = "";
 
-            ChangeSaveStatusLabel(0, 0, Color.Black, "");
+            ChangeSaveStatusLabel(0, 0, Randee.TEXT_COLOUR, "");
         }
 
 
@@ -249,7 +264,7 @@ namespace Randee
 
                 UpdateSettings(SETTINGS_API_KEY + SETTINGS_ON);
 
-                ChangeSaveStatusLabel(115, 124, Color.Black, "Key successfully saved!");
+                ChangeSaveStatusLabel(115, 124, Randee.TEXT_COLOUR, "Key successfully saved!");
 
                 return;
             }
@@ -363,6 +378,11 @@ namespace Randee
         public void SetSeperator(string seperator)
         {
             this.seperator = seperator;
+        }
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

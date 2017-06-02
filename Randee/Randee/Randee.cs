@@ -30,11 +30,11 @@ namespace Randee
         private string generatedNumbers;
 
         /* Colours */
-        private static Color TITLE_BAR_BACK_COLOUR = Color.FromArgb(64, 64, 64);
-        private static Color WINDOW_BACK_COLOUR = Color.FromArgb(128, 128, 128);
-        private static Color TEXT_COLOUR = Color.FromArgb(230, 230, 230);
-        private static Color INPUT_COLOUR = Color.FromArgb(255, 255, 255);
-        private static Color RESULTS_COLOUR = Color.FromArgb(0, 153, 0);
+        public static Color TITLE_BAR_BACK_COLOUR = Color.FromArgb(64, 64, 64);
+        public static Color WINDOW_BACK_COLOUR = Color.FromArgb(128, 128, 128);
+        public static Color TEXT_COLOUR = Color.FromArgb(230, 230, 230);
+        public static Color INPUT_COLOUR = Color.FromArgb(255, 255, 255);
+        public static Color RESULTS_COLOUR = Color.FromArgb(0, 153, 0);
 
 
 
@@ -73,9 +73,15 @@ namespace Randee
             numberOfNumbersInput.BackColor = WINDOW_BACK_COLOUR;
             numberOfNumbersInput.ForeColor = INPUT_COLOUR;
 
+            generateNumber.BackColor = WINDOW_BACK_COLOUR;
+            generateNumber.ForeColor = INPUT_COLOUR;
+
             // Set the result colours
             numberDisplay.ForeColor = RESULTS_COLOUR;
             labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
+
+            // Clear the default text
+            ClearNumbers();
         }
 
 
@@ -133,23 +139,6 @@ namespace Randee
 
 
 
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            settingsForm.BackColor = BackColor;
-
-            Point window = Location;
-            window.Offset(0, 42);
-
-            settingsForm.Location = window;
-
-            if(!settingsForm.Visible)
-            {
-                settingsForm.Show(this);
-            }
-        }
-
-
-
         private void Randee_LocationChanged(object sender, EventArgs e)
         {
             Point window = Location;
@@ -191,9 +180,40 @@ namespace Randee
 
 
 
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            ClearNumbers();
+
+            settingsForm.BackColor = BackColor;
+
+            Point window = Location;
+            window.Offset(0, 42);
+
+            settingsForm.Location = window;
+
+            if (!settingsForm.Visible)
+            {
+                settingsForm.Show(this);
+            }
+        }
+
+
+
         private void buttonHome_Leave(object sender, EventArgs e)
         {
             buttonHome.BackgroundImage = Properties.Resources.home_button_c0c0c0;
+        }
+
+
+
+        private void buttonSettings_MouseOver(object sender, EventArgs e)
+        {
+            buttonSettings.BackgroundImage = Properties.Resources.settings_button_FFFFFF;
+        }
+
+        private void buttonSettings_Leave(object sender, EventArgs e)
+        {
+            buttonSettings.BackgroundImage = Properties.Resources.settings_button_c0c0c0;
         }
 
 
@@ -252,6 +272,14 @@ namespace Randee
             {
                 streamWriter.WriteLine(history + "\r\n\r\n");
             }
+        }
+
+
+
+        private void ClearNumbers()
+        {
+            numberDisplay.Text = "";
+            labelMultipleNumbers.Text = "";
         }
     }
 }

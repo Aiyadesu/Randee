@@ -103,5 +103,11 @@
   <ItemGroup>
     <None Include="Resources\home_button_FFFFFFF.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_button_c0c0c0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_button_FFFFFF.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
