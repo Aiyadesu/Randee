@@ -20,6 +20,8 @@ namespace Randee
 
         /* Randee Constants */
         public const string API_KEY = "RANDOM_ORG_API";
+        private const string TITLE_HOME = "Randee - Home";
+        private const string TITLE_SETTINGS = "Randee - Settings";
 
         /* Other Pages/Forms */
         private Settings settingsForm = new Settings();
@@ -82,6 +84,8 @@ namespace Randee
 
             // Clear the default text
             ClearNumbers();
+
+            UpdateTitle(TITLE_HOME);
         }
 
 
@@ -169,6 +173,8 @@ namespace Randee
             {
                 settingsForm.Hide();
             }
+
+            UpdateTitle(TITLE_HOME);
         }
 
 
@@ -183,6 +189,7 @@ namespace Randee
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             ClearNumbers();
+            UpdateTitle(TITLE_SETTINGS);
 
             settingsForm.BackColor = BackColor;
 
@@ -272,6 +279,13 @@ namespace Randee
             {
                 streamWriter.WriteLine(history + "\r\n\r\n");
             }
+        }
+
+
+
+        private void UpdateTitle(string newTitle)
+        {
+            titleText.Text = newTitle;
         }
 
 
