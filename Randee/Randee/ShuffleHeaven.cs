@@ -224,10 +224,10 @@ namespace Randee
 
             foreach (int number in tro.result.random.data)
             {
-                numbers += number;
+                numbers += number + ",";
             }
 
-            return numbers;
+            return numbers.Remove(numbers.Length - 1);
         }
 
 
@@ -287,6 +287,8 @@ namespace Randee
             bitsLeft = bitsRemaining;
         }
 
+
+
         private static int GetRequestsLeft()
         {
             return requestsLeft;
@@ -297,6 +299,8 @@ namespace Randee
             requestsLeft = requestsRemaining;
         }
 
+
+
         private static int GetAdvisoryDelay()
         {
             return advisoryDelay;
@@ -306,6 +310,8 @@ namespace Randee
         {
             advisoryDelay = advisedDelay;
         }
+
+
 
         private static DateTime GetAdvisedRequestTime()
         {
@@ -323,8 +329,6 @@ namespace Randee
         {
             return exceptionThrown;
         }
-
-
 
         private static void SetExceptionThrown(bool exceptionThrownValue)
         {

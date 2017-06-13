@@ -29,143 +29,143 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Randee));
-            this.generateNumber = new System.Windows.Forms.Button();
-            this.maxRangeInput = new System.Windows.Forms.NumericUpDown();
-            this.numberDisplay = new System.Windows.Forms.Label();
-            this.customRangeLabel = new System.Windows.Forms.Label();
-            this.fromLabel = new System.Windows.Forms.Label();
-            this.minRangeInput = new System.Windows.Forms.NumericUpDown();
-            this.toLabel = new System.Windows.Forms.Label();
-            this.numberOfNumbersLabel = new System.Windows.Forms.Label();
-            this.numberOfNumbersInput = new System.Windows.Forms.NumericUpDown();
+            this.buttonGenerateNumber = new System.Windows.Forms.Button();
+            this.inputMaxRange = new System.Windows.Forms.NumericUpDown();
+            this.labelNumberDisplay = new System.Windows.Forms.Label();
+            this.labelCustomRange = new System.Windows.Forms.Label();
+            this.labelFrom = new System.Windows.Forms.Label();
+            this.inputMinRange = new System.Windows.Forms.NumericUpDown();
+            this.labelTo = new System.Windows.Forms.Label();
+            this.labelNumberOfNumbers = new System.Windows.Forms.Label();
+            this.inputNumberOfNumbers = new System.Windows.Forms.NumericUpDown();
             this.labelMultipleNumbers = new System.Windows.Forms.Label();
-            this.titleText = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.buttonSettings = new System.Windows.Forms.PictureBox();
             this.buttonHome = new System.Windows.Forms.PictureBox();
             this.buttonClose = new System.Windows.Forms.PictureBox();
             this.windowMask = new System.Windows.Forms.PictureBox();
             this.labelErrorMessage = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfNumbersInput)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputMaxRange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputMinRange)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputNumberOfNumbers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonSettings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHome)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.windowMask)).BeginInit();
             this.SuspendLayout();
             // 
-            // generateNumber
+            // buttonGenerateNumber
             // 
-            this.generateNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.generateNumber.Location = new System.Drawing.Point(167, 380);
-            this.generateNumber.Name = "generateNumber";
-            this.generateNumber.Size = new System.Drawing.Size(100, 35);
-            this.generateNumber.TabIndex = 1;
-            this.generateNumber.Text = "Generate!";
-            this.generateNumber.UseVisualStyleBackColor = true;
-            this.generateNumber.Click += new System.EventHandler(this.generateNumber_Click);
+            this.buttonGenerateNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonGenerateNumber.Location = new System.Drawing.Point(167, 380);
+            this.buttonGenerateNumber.Name = "buttonGenerateNumber";
+            this.buttonGenerateNumber.Size = new System.Drawing.Size(100, 35);
+            this.buttonGenerateNumber.TabIndex = 1;
+            this.buttonGenerateNumber.Text = "Generate!";
+            this.buttonGenerateNumber.UseVisualStyleBackColor = true;
+            this.buttonGenerateNumber.Click += new System.EventHandler(this.buttonGenerateNumber_Click);
             // 
-            // maxRangeInput
+            // inputMaxRange
             // 
-            this.maxRangeInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.maxRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.maxRangeInput.Location = new System.Drawing.Point(260, 143);
-            this.maxRangeInput.Maximum = new decimal(new int[] {
+            this.inputMaxRange.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inputMaxRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputMaxRange.Location = new System.Drawing.Point(260, 143);
+            this.inputMaxRange.Maximum = new decimal(new int[] {
             2000000000,
             0,
             0,
             0});
-            this.maxRangeInput.Name = "maxRangeInput";
-            this.maxRangeInput.Size = new System.Drawing.Size(94, 25);
-            this.maxRangeInput.TabIndex = 3;
-            this.maxRangeInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.maxRangeInput.Value = new decimal(new int[] {
+            this.inputMaxRange.Name = "inputMaxRange";
+            this.inputMaxRange.Size = new System.Drawing.Size(94, 25);
+            this.inputMaxRange.TabIndex = 3;
+            this.inputMaxRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inputMaxRange.Value = new decimal(new int[] {
             14,
             0,
             0,
             0});
             // 
-            // numberDisplay
+            // labelNumberDisplay
             // 
-            this.numberDisplay.AutoSize = true;
-            this.numberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numberDisplay.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.numberDisplay.Location = new System.Drawing.Point(530, 84);
-            this.numberDisplay.Name = "numberDisplay";
-            this.numberDisplay.Size = new System.Drawing.Size(121, 24);
-            this.numberDisplay.TabIndex = 4;
-            this.numberDisplay.Text = "One Number";
+            this.labelNumberDisplay.AutoSize = true;
+            this.labelNumberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNumberDisplay.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelNumberDisplay.Location = new System.Drawing.Point(530, 84);
+            this.labelNumberDisplay.Name = "labelNumberDisplay";
+            this.labelNumberDisplay.Size = new System.Drawing.Size(121, 24);
+            this.labelNumberDisplay.TabIndex = 4;
+            this.labelNumberDisplay.Text = "One Number";
             // 
-            // customRangeLabel
+            // labelCustomRange
             // 
-            this.customRangeLabel.AutoSize = true;
-            this.customRangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customRangeLabel.Location = new System.Drawing.Point(77, 69);
-            this.customRangeLabel.Name = "customRangeLabel";
-            this.customRangeLabel.Size = new System.Drawing.Size(277, 24);
-            this.customRangeLabel.TabIndex = 5;
-            this.customRangeLabel.Text = "Number Generation Parameters";
+            this.labelCustomRange.AutoSize = true;
+            this.labelCustomRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCustomRange.Location = new System.Drawing.Point(77, 69);
+            this.labelCustomRange.Name = "labelCustomRange";
+            this.labelCustomRange.Size = new System.Drawing.Size(277, 24);
+            this.labelCustomRange.TabIndex = 5;
+            this.labelCustomRange.Text = "Number Generation Parameters";
             // 
-            // fromLabel
+            // labelFrom
             // 
-            this.fromLabel.AutoSize = true;
-            this.fromLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fromLabel.Location = new System.Drawing.Point(65, 143);
-            this.fromLabel.Name = "fromLabel";
-            this.fromLabel.Size = new System.Drawing.Size(55, 24);
-            this.fromLabel.TabIndex = 6;
-            this.fromLabel.Text = "From";
+            this.labelFrom.AutoSize = true;
+            this.labelFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFrom.Location = new System.Drawing.Point(65, 143);
+            this.labelFrom.Name = "labelFrom";
+            this.labelFrom.Size = new System.Drawing.Size(55, 24);
+            this.labelFrom.TabIndex = 6;
+            this.labelFrom.Text = "From";
             // 
-            // minRangeInput
+            // inputMinRange
             // 
-            this.minRangeInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.minRangeInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minRangeInput.Location = new System.Drawing.Point(126, 143);
-            this.minRangeInput.Maximum = new decimal(new int[] {
+            this.inputMinRange.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inputMinRange.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputMinRange.Location = new System.Drawing.Point(126, 143);
+            this.inputMinRange.Maximum = new decimal(new int[] {
             2000000000,
             0,
             0,
             0});
-            this.minRangeInput.Name = "minRangeInput";
-            this.minRangeInput.Size = new System.Drawing.Size(95, 25);
-            this.minRangeInput.TabIndex = 7;
-            this.minRangeInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.minRangeInput.Value = new decimal(new int[] {
+            this.inputMinRange.Name = "inputMinRange";
+            this.inputMinRange.Size = new System.Drawing.Size(95, 25);
+            this.inputMinRange.TabIndex = 7;
+            this.inputMinRange.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inputMinRange.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // toLabel
+            // labelTo
             // 
-            this.toLabel.AutoSize = true;
-            this.toLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toLabel.Location = new System.Drawing.Point(227, 143);
-            this.toLabel.Name = "toLabel";
-            this.toLabel.Size = new System.Drawing.Size(25, 24);
-            this.toLabel.TabIndex = 8;
-            this.toLabel.Text = "to";
+            this.labelTo.AutoSize = true;
+            this.labelTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTo.Location = new System.Drawing.Point(227, 143);
+            this.labelTo.Name = "labelTo";
+            this.labelTo.Size = new System.Drawing.Size(25, 24);
+            this.labelTo.TabIndex = 8;
+            this.labelTo.Text = "to";
             // 
-            // numberOfNumbersLabel
+            // labelNumberOfNumbers
             // 
-            this.numberOfNumbersLabel.AutoSize = true;
-            this.numberOfNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.numberOfNumbersLabel.Location = new System.Drawing.Point(65, 217);
-            this.numberOfNumbersLabel.Name = "numberOfNumbersLabel";
-            this.numberOfNumbersLabel.Size = new System.Drawing.Size(289, 24);
-            this.numberOfNumbersLabel.TabIndex = 11;
-            this.numberOfNumbersLabel.Text = "Number of numbers to generate?";
+            this.labelNumberOfNumbers.AutoSize = true;
+            this.labelNumberOfNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelNumberOfNumbers.Location = new System.Drawing.Point(65, 217);
+            this.labelNumberOfNumbers.Name = "labelNumberOfNumbers";
+            this.labelNumberOfNumbers.Size = new System.Drawing.Size(289, 24);
+            this.labelNumberOfNumbers.TabIndex = 11;
+            this.labelNumberOfNumbers.Text = "Number of numbers to generate?";
             // 
-            // numberOfNumbersInput
+            // inputNumberOfNumbers
             // 
-            this.numberOfNumbersInput.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numberOfNumbersInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.numberOfNumbersInput.Location = new System.Drawing.Point(167, 300);
-            this.numberOfNumbersInput.Name = "numberOfNumbersInput";
-            this.numberOfNumbersInput.Size = new System.Drawing.Size(95, 25);
-            this.numberOfNumbersInput.TabIndex = 12;
-            this.numberOfNumbersInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numberOfNumbersInput.Value = new decimal(new int[] {
+            this.inputNumberOfNumbers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inputNumberOfNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.inputNumberOfNumbers.Location = new System.Drawing.Point(167, 300);
+            this.inputNumberOfNumbers.Name = "inputNumberOfNumbers";
+            this.inputNumberOfNumbers.Size = new System.Drawing.Size(95, 25);
+            this.inputNumberOfNumbers.TabIndex = 12;
+            this.inputNumberOfNumbers.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.inputNumberOfNumbers.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -182,15 +182,15 @@
             this.labelMultipleNumbers.Text = "Multiple Numbers";
             this.labelMultipleNumbers.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // titleText
+            // labelTitle
             // 
-            this.titleText.AutoSize = true;
-            this.titleText.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.titleText.Location = new System.Drawing.Point(13, 13);
-            this.titleText.Name = "titleText";
-            this.titleText.Size = new System.Drawing.Size(82, 24);
-            this.titleText.TabIndex = 15;
-            this.titleText.Text = "Randee ";
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelTitle.Location = new System.Drawing.Point(13, 13);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(82, 24);
+            this.labelTitle.TabIndex = 15;
+            this.labelTitle.Text = "Randee ";
             // 
             // buttonSettings
             // 
@@ -257,18 +257,18 @@
             this.Controls.Add(this.labelErrorMessage);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonHome);
-            this.Controls.Add(this.titleText);
+            this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.labelMultipleNumbers);
-            this.Controls.Add(this.numberOfNumbersInput);
-            this.Controls.Add(this.numberOfNumbersLabel);
+            this.Controls.Add(this.inputNumberOfNumbers);
+            this.Controls.Add(this.labelNumberOfNumbers);
             this.Controls.Add(this.buttonClose);
-            this.Controls.Add(this.toLabel);
-            this.Controls.Add(this.minRangeInput);
-            this.Controls.Add(this.fromLabel);
-            this.Controls.Add(this.customRangeLabel);
-            this.Controls.Add(this.numberDisplay);
-            this.Controls.Add(this.maxRangeInput);
-            this.Controls.Add(this.generateNumber);
+            this.Controls.Add(this.labelTo);
+            this.Controls.Add(this.inputMinRange);
+            this.Controls.Add(this.labelFrom);
+            this.Controls.Add(this.labelCustomRange);
+            this.Controls.Add(this.labelNumberDisplay);
+            this.Controls.Add(this.inputMaxRange);
+            this.Controls.Add(this.buttonGenerateNumber);
             this.Controls.Add(this.windowMask);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Randee";
@@ -276,9 +276,9 @@
             this.Text = "Randee";
             this.LocationChanged += new System.EventHandler(this.Randee_LocationChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Randee_MouseDown);
-            ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numberOfNumbersInput)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputMaxRange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputMinRange)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.inputNumberOfNumbers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonSettings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonHome)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonClose)).EndInit();
@@ -289,19 +289,19 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button generateNumber;
-        private System.Windows.Forms.NumericUpDown minRangeInput;
-        private System.Windows.Forms.NumericUpDown maxRangeInput;
-        private System.Windows.Forms.Label numberDisplay;
-        private System.Windows.Forms.Label customRangeLabel;
-        private System.Windows.Forms.Label fromLabel;
-        private System.Windows.Forms.Label toLabel;
+        private System.Windows.Forms.Button buttonGenerateNumber;
+        private System.Windows.Forms.NumericUpDown inputMinRange;
+        private System.Windows.Forms.NumericUpDown inputMaxRange;
+        private System.Windows.Forms.Label labelNumberDisplay;
+        private System.Windows.Forms.Label labelCustomRange;
+        private System.Windows.Forms.Label labelFrom;
+        private System.Windows.Forms.Label labelTo;
         private System.Windows.Forms.PictureBox buttonClose;
-        private System.Windows.Forms.Label numberOfNumbersLabel;
-        private System.Windows.Forms.NumericUpDown numberOfNumbersInput;
+        private System.Windows.Forms.Label labelNumberOfNumbers;
+        private System.Windows.Forms.NumericUpDown inputNumberOfNumbers;
         private System.Windows.Forms.Label labelMultipleNumbers;
         private System.Windows.Forms.PictureBox windowMask;
-        private System.Windows.Forms.Label titleText;
+        private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.PictureBox buttonHome;
         private System.Windows.Forms.PictureBox buttonSettings;
         private System.Windows.Forms.Label labelErrorMessage;

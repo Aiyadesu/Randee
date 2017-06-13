@@ -50,7 +50,6 @@ namespace Randee
 
 
 
-        // Default Constructor
         public Randee()
         {
             InitializeComponent();
@@ -59,32 +58,32 @@ namespace Randee
             BackColor = TITLE_BAR_BACK_COLOUR;
 
             // Set the display colours
-            numberDisplay.ForeColor = TEXT_COLOUR;
-            titleText.ForeColor = TEXT_COLOUR;
-            customRangeLabel.ForeColor = TEXT_COLOUR;
-            fromLabel.ForeColor = TEXT_COLOUR;
-            toLabel.ForeColor = TEXT_COLOUR;
-            numberOfNumbersLabel.ForeColor = TEXT_COLOUR;
+            labelNumberDisplay.ForeColor   = TEXT_COLOUR;
+            labelTitle.ForeColor           = TEXT_COLOUR;
+            labelCustomRange.ForeColor     = TEXT_COLOUR;
+            labelFrom.ForeColor            = TEXT_COLOUR;
+            labelTo.ForeColor              = TEXT_COLOUR;
+            labelNumberOfNumbers.ForeColor = TEXT_COLOUR;
 
             // Set the input colours
-            minRangeInput.BackColor = WINDOW_BACK_COLOUR;
-            minRangeInput.ForeColor = INPUT_COLOUR;
+            inputMinRange.BackColor        = WINDOW_BACK_COLOUR;
+            inputMinRange.ForeColor        = INPUT_COLOUR;
 
-            maxRangeInput.BackColor = WINDOW_BACK_COLOUR;
-            maxRangeInput.ForeColor = INPUT_COLOUR;
+            inputMaxRange.BackColor        = WINDOW_BACK_COLOUR;
+            inputMaxRange.ForeColor        = INPUT_COLOUR;
 
-            numberOfNumbersInput.BackColor = WINDOW_BACK_COLOUR;
-            numberOfNumbersInput.ForeColor = INPUT_COLOUR;
+            inputNumberOfNumbers.BackColor = WINDOW_BACK_COLOUR;
+            inputNumberOfNumbers.ForeColor = INPUT_COLOUR;
 
-            generateNumber.BackColor = WINDOW_BACK_COLOUR;
-            generateNumber.ForeColor = INPUT_COLOUR;
+            buttonGenerateNumber.BackColor = WINDOW_BACK_COLOUR;
+            buttonGenerateNumber.ForeColor = INPUT_COLOUR;
 
             // Set the result colours
-            numberDisplay.ForeColor = RESULTS_COLOUR;
+            labelNumberDisplay.ForeColor   = RESULTS_COLOUR;
             labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
 
             // Set the error message colour
-            labelErrorMessage.ForeColor = ERROR_COLOUR;
+            labelErrorMessage.ForeColor    = ERROR_COLOUR;
 
             // Clear the default text
             ClearNumbers();
@@ -99,21 +98,30 @@ namespace Randee
 
 
 
-        // The main event function to be called
-        private void generateNumber_Click(object sender, EventArgs e)
+        /*
+         * Generates a true or pseudo random number 
+         * depending on whether the Random.org API Key has been set.
+         */
+        private void buttonGenerateNumber_Click(object sender, EventArgs e)
         {
             ClearErrorMessage();
-            generateNumber.Enabled = false; // Lock the button
-            Cursor.Current = Cursors.WaitCursor;
+            buttonGenerateNumber.Enabled = false; // Lock the button
+            ChangeCursor();
 
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
             {
-                string number = ShuffleHeaven.GetTrueRandomNumber((int)numberOfNumbersInput.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value);
+                string number = ShuffleHeaven.GetTrueRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
 
-                numberDisplay.Text = numberOfNumbersInput.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
-                labelMultipleNumbers.Text = numberOfNumbersInput.Value > 1 ? number : "";
+                labelNumberDisplay.Text = 
+                    inputNumberOfNumbers.Value > 1 ? 
+                    "Your random numbers are: " : "Your random number is: " + number;
 
+                labelMultipleNumbers.Text =
+                    inputNumberOfNumbers.Value > 1 ?
+                    number : String.Empty;
+
+                // Shows an error message if 'ShuffleHeaven' throws an exception
                 if(ShuffleHeaven.GetExceptionThrown())
                 {
                     labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nNumber provided is not true random";
@@ -121,7 +129,7 @@ namespace Randee
 
                 AddToLog(number);
 
-                generateNumber.Enabled = true; // Unlock the button
+                buttonGenerateNumber.Enabled = true; // Unlock the button
 
                 return;
             }
@@ -129,22 +137,31 @@ namespace Randee
 
 
             /* Generates a pseudo random number */
-            if (minRangeInput.Value > Byte.MaxValue || maxRangeInput.Value > Byte.MaxValue)
+            if (inputMinRange.Value > Byte.MaxValue || inputMaxRange.Value > Byte.MaxValue)
             {
-                string number = ShuffleHeaven.GenerateNumber((int) numberOfNumbersInput.Value, (int)minRangeInput.Value, (int)maxRangeInput.Value).ToString();
+                string number = ShuffleHeaven.GenerateNumber((int) inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value).ToString();
 
-                numberDisplay.Text = numberOfNumbersInput.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
-                labelMultipleNumbers.Text = numberOfNumbersInput.Value > 1 ? number : "";
+                labelNumberDisplay.Text = 
+                    inputNumberOfNumbers.Value > 1 ? 
+                    "Your random numbers are: " : "Your random number is: " + number;
+
+                labelMultipleNumbers.Text = 
+                    inputNumberOfNumbers.Value > 1 ? 
+                    number : String.Empty;
 
                 AddToLog(number);
             }
 
-            Cursor.Current = Cursors.Default;
-            generateNumber.Enabled = true; // Unlock the button
+            buttonGenerateNumber.Enabled = true; // Unlock the button
         }
 
 
 
+        /* 
+         * Moves the 'Randee' window around
+         * if the user is holding down the left
+         * mouse button in the title bar area 
+         */
         private void Randee_MouseDown(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Left)
@@ -156,6 +173,9 @@ namespace Randee
 
 
 
+        /*
+         * Moves the 'other' forms along with the 'Randee' window
+         */
         private void Randee_LocationChanged(object sender, EventArgs e)
         {
             Point window = Location;
@@ -166,12 +186,27 @@ namespace Randee
 
 
 
+        /*
+         * Changes the buttons colour. Default is colour is 'c0c0c0'.
+         * Changes to 'FFFFFF' if the button is hovered.
+         * Changes back to the default colour when no longer hovered.
+         */
+
+        /* 'Close' button functions */
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            if(settingsForm.GetKeepHistory())
+            {
+                OutputLogFile();
+            }
+
+            Application.Exit();
+        }
+
         private void buttonClose_MouseOver(object sender, EventArgs e)
         {
             buttonClose.BackgroundImage = Properties.Resources.close_button_FFFFFF;
         }
-
-
 
         private void buttonClose_Leave(object sender, EventArgs e)
         {
@@ -180,6 +215,7 @@ namespace Randee
 
 
 
+        /* 'Home' button functions */
         private void buttonHome_Click(object sender, EventArgs e)
         {
             if(settingsForm.Visible)
@@ -190,15 +226,19 @@ namespace Randee
             UpdateTitle(TITLE_HOME);
         }
 
-
-
         private void buttonHome_MouseOver(object sender, EventArgs e)
         {
             buttonHome.BackgroundImage = Properties.Resources.home_button_FFFFFFF;
         }
 
+        private void buttonHome_Leave(object sender, EventArgs e)
+        {
+            buttonHome.BackgroundImage = Properties.Resources.home_button_c0c0c0;
+        }
 
 
+
+        /* 'Settings' button functions */
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             ClearNumbers();
@@ -217,15 +257,6 @@ namespace Randee
             }
         }
 
-
-
-        private void buttonHome_Leave(object sender, EventArgs e)
-        {
-            buttonHome.BackgroundImage = Properties.Resources.home_button_c0c0c0;
-        }
-
-
-
         private void buttonSettings_MouseOver(object sender, EventArgs e)
         {
             buttonSettings.BackgroundImage = Properties.Resources.settings_button_FFFFFF;
@@ -234,19 +265,6 @@ namespace Randee
         private void buttonSettings_Leave(object sender, EventArgs e)
         {
             buttonSettings.BackgroundImage = Properties.Resources.settings_button_c0c0c0;
-        }
-
-
-
-        /* 
-         * Closes the application.
-         * Add "clean up" code here!
-         */
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            OutputLogFile();
-
-            Application.Exit();
         }
 
 
@@ -267,15 +285,6 @@ namespace Randee
         {
             string history = dateTimeAppOpened + generatedNumbers;
 
-
-
-            if(!settingsForm.GetKeepHistory())
-            {
-                return;
-            }
-
-
-
             if(!File.Exists(historyPath))
             {
                 using (FileStream fileStream = File.Create(historyPath))
@@ -286,34 +295,41 @@ namespace Randee
                 return;
             }
 
-
-
             using (StreamWriter streamWriter = File.AppendText(historyPath))
             {
                 streamWriter.WriteLine(history + "\r\n\r\n");
             }
         }
 
-
+        /* Support Functions */
 
         private void UpdateTitle(string newTitle)
         {
-            titleText.Text = newTitle;
+            labelTitle.Text = newTitle;
         }
 
 
 
         private void ClearNumbers()
         {
-            numberDisplay.Text = "";
-            labelMultipleNumbers.Text = "";
+            labelNumberDisplay.Text   = String.Empty;
+            labelMultipleNumbers.Text = String.Empty;
         }
 
 
 
         private void ClearErrorMessage()
         {
-            labelErrorMessage.Text = "";
+            labelErrorMessage.Text = String.Empty;
+        }
+
+
+
+        private void ChangeCursor()
+        {
+            Cursor.Current = 
+                Cursor.Current == Cursors.Default ? 
+                Cursors.WaitCursor : Cursors.Default;
         }
     }
 }

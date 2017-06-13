@@ -52,7 +52,6 @@ namespace Randee
 
             /* Initialise class members */
             seperator = " "; 
-           // keepHistory = false; 
 
 
 
@@ -67,9 +66,9 @@ namespace Randee
                 CreateSettingsFile();
             }
 
+
+
             ReadSettingsFile();
-
-
 
             /* Setup the GUI */
             checkBoxKeepHistory.Checked = keepHistory;
@@ -149,13 +148,6 @@ namespace Randee
 
 
 
-        private void buttonHome_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-
-
         /* Main Functions */
 
 
@@ -180,7 +172,7 @@ namespace Randee
         /// <returns>A string with the contents of the settings file.</returns>
         private string ReadSettingsFile()
         {
-            string settings = "";
+            string settings = String.Empty;
 
             // Open the 'settings.txt' file and then store the contents of the file in a string
             using (StreamReader streamReader = File.OpenText(settingsPath))
