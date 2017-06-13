@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Net;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace Randee
 {
@@ -13,7 +15,7 @@ namespace Randee
         /* Class Members */
 
         private static RNGCryptoServiceProvider crng    = new RNGCryptoServiceProvider();
-        private static Random prng                      = new Random();
+        private static System.Random prng               = new System.Random();
         private static WebClient webClient              = new WebClient();
 
         /* Random.org Information */
@@ -25,6 +27,8 @@ namespace Randee
         private static DateTime sessionStartTime = DateTime.Now.ToUniversalTime();
         private static DateTime advisedRequestTime;
         private static DateTime defaultDateTime;
+
+        private static bool exceptionThrown;
         
 
 
@@ -109,7 +113,7 @@ namespace Randee
         {
             string numbers = "";
 
-            Random sprng = new Random(GenerateSeed());
+            System.Random sprng = new System.Random();
 
             if(numberOfNumbers == 1)
             {
@@ -183,6 +187,9 @@ namespace Randee
         /// <param name="maxRange"></param>
         public static string GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
+            numbers = "";
+            SetExceptionThrown(false);
+
             if(DateTime.Now.ToUniversalTime().Day > sessionStartTime.Day)
             {
                 SetRequestsLeft(1000);
@@ -196,14 +203,29 @@ namespace Randee
            
             string requestID = "1414";
 
-            string response = webClient.UploadString("https://api.random.org/json-rpc/1/invoke", 
-                "{\"jsonrpc\":\"2.0\",\"method\":\"generateIntegers\",\"params\":{\"apiKey\":\"" 
+            string response = "";
+
+            try
+            {
+                response = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
+                "{\"jsonrpc\":\"2.0\",\"method\":\"generateIntegers\",\"params\":{\"apiKey\":\""
                 + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\",\"n\":"
-                + numberOfNumbers.ToString() + ",\"min\":" + minRange.ToString() + ",\"max\":" + maxRange.ToString() 
+                + numberOfNumbers.ToString() + ",\"min\":" + minRange.ToString() + ",\"max\":" + maxRange.ToString()
                 + ",\"replacement\":true,\"base\":10},\"id\":" + requestID + "}");
+            }
+            catch (WebException)
+            {
+                SetExceptionThrown(true);
 
+                return GenerateNumber(numberOfNumbers, minRange, maxRange);
+            }
 
-            ExtractInformationFromResponse(response);
+            TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(response);
+
+            foreach (int number in tro.result.random.data)
+            {
+                numbers += number;
+            }
 
             return numbers;
         }
@@ -211,6 +233,7 @@ namespace Randee
 
 
         /* 
+         * DEPRECATED!
          * Avoid reading this function, just trust it works.
          * This is why people use JSON.NET.
          */
@@ -292,6 +315,20 @@ namespace Randee
         private static void SetAdvisedRequestTime()
         {
             advisedRequestTime = DateTime.Now.ToUniversalTime().AddMilliseconds(advisoryDelay);
+        }
+
+
+
+        public static bool GetExceptionThrown()
+        {
+            return exceptionThrown;
+        }
+
+
+
+        private static void SetExceptionThrown(bool exceptionThrownValue)
+        {
+            exceptionThrown = exceptionThrownValue;
         }
     }
 }

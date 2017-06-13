@@ -44,6 +44,7 @@
             this.buttonHome = new System.Windows.Forms.PictureBox();
             this.buttonClose = new System.Windows.Forms.PictureBox();
             this.windowMask = new System.Windows.Forms.PictureBox();
+            this.labelErrorMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.maxRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minRangeInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfNumbersInput)).BeginInit();
@@ -89,7 +90,7 @@
             this.numberDisplay.AutoSize = true;
             this.numberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numberDisplay.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.numberDisplay.Location = new System.Drawing.Point(513, 69);
+            this.numberDisplay.Location = new System.Drawing.Point(530, 84);
             this.numberDisplay.Name = "numberDisplay";
             this.numberDisplay.Size = new System.Drawing.Size(121, 24);
             this.numberDisplay.TabIndex = 4;
@@ -174,9 +175,9 @@
             // 
             this.labelMultipleNumbers.AutoEllipsis = true;
             this.labelMultipleNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.labelMultipleNumbers.Location = new System.Drawing.Point(448, 114);
+            this.labelMultipleNumbers.Location = new System.Drawing.Point(451, 120);
             this.labelMultipleNumbers.Name = "labelMultipleNumbers";
-            this.labelMultipleNumbers.Size = new System.Drawing.Size(371, 333);
+            this.labelMultipleNumbers.Size = new System.Drawing.Size(368, 332);
             this.labelMultipleNumbers.TabIndex = 13;
             this.labelMultipleNumbers.Text = "Multiple Numbers";
             this.labelMultipleNumbers.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -235,6 +236,17 @@
             this.windowMask.TabIndex = 14;
             this.windowMask.TabStop = false;
             // 
+            // labelErrorMessage
+            // 
+            this.labelErrorMessage.AutoSize = true;
+            this.labelErrorMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.labelErrorMessage.Location = new System.Drawing.Point(502, 46);
+            this.labelErrorMessage.Name = "labelErrorMessage";
+            this.labelErrorMessage.Size = new System.Drawing.Size(71, 17);
+            this.labelErrorMessage.TabIndex = 18;
+            this.labelErrorMessage.Text = "Error Text";
+            this.labelErrorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -242,6 +254,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(840, 473);
+            this.Controls.Add(this.labelErrorMessage);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonHome);
             this.Controls.Add(this.titleText);
@@ -291,6 +304,7 @@
         private System.Windows.Forms.Label titleText;
         private System.Windows.Forms.PictureBox buttonHome;
         private System.Windows.Forms.PictureBox buttonSettings;
+        private System.Windows.Forms.Label labelErrorMessage;
     }
 }
 

@@ -33,10 +33,11 @@ namespace Randee
 
         /* Colours */
         public static Color TITLE_BAR_BACK_COLOUR = Color.FromArgb(64, 64, 64);
-        public static Color WINDOW_BACK_COLOUR = Color.FromArgb(128, 128, 128);
-        public static Color TEXT_COLOUR = Color.FromArgb(230, 230, 230);
-        public static Color INPUT_COLOUR = Color.FromArgb(255, 255, 255);
-        public static Color RESULTS_COLOUR = Color.FromArgb(0, 153, 0);
+        public static Color WINDOW_BACK_COLOUR    = Color.FromArgb(128, 128, 128);
+        public static Color TEXT_COLOUR           = Color.FromArgb(230, 230, 230);
+        public static Color INPUT_COLOUR          = Color.FromArgb(255, 255, 255);
+        public static Color RESULTS_COLOUR        = Color.FromArgb(0, 153, 0);
+        public static Color ERROR_COLOUR          = Color.FromArgb(204, 0, 0);
 
 
 
@@ -82,8 +83,12 @@ namespace Randee
             numberDisplay.ForeColor = RESULTS_COLOUR;
             labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
 
+            // Set the error message colour
+            labelErrorMessage.ForeColor = ERROR_COLOUR;
+
             // Clear the default text
             ClearNumbers();
+            ClearErrorMessage();
 
             UpdateTitle(TITLE_HOME);
         }
@@ -97,7 +102,9 @@ namespace Randee
         // The main event function to be called
         private void generateNumber_Click(object sender, EventArgs e)
         {
+            ClearErrorMessage();
             generateNumber.Enabled = false; // Lock the button
+            Cursor.Current = Cursors.WaitCursor;
 
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
@@ -106,6 +113,11 @@ namespace Randee
 
                 numberDisplay.Text = numberOfNumbersInput.Value > 1 ? "Your random numbers are: " : "Your random number is: " + number;
                 labelMultipleNumbers.Text = numberOfNumbersInput.Value > 1 ? number : "";
+
+                if(ShuffleHeaven.GetExceptionThrown())
+                {
+                    labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nNumber provided is not true random";
+                }
 
                 AddToLog(number);
 
@@ -127,6 +139,7 @@ namespace Randee
                 AddToLog(number);
             }
 
+            Cursor.Current = Cursors.Default;
             generateNumber.Enabled = true; // Unlock the button
         }
 
@@ -294,6 +307,13 @@ namespace Randee
         {
             numberDisplay.Text = "";
             labelMultipleNumbers.Text = "";
+        }
+
+
+
+        private void ClearErrorMessage()
+        {
+            labelErrorMessage.Text = "";
         }
     }
 }
