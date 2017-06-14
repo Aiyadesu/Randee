@@ -54,11 +54,6 @@ namespace Randee
         {
             InitializeComponent();
 
-            if (settingsForm.IsAPIKeySet())
-            {
-                ShuffleHeaven.GetUsage();
-            }
-
             /* Set the "dark" theme of the application */
             BackColor = TITLE_BAR_BACK_COLOUR;
 
@@ -102,6 +97,14 @@ namespace Randee
             ClearErrorMessage();
 
             UpdateTitle(TITLE_HOME);
+
+            if(settingsForm.IsAPIKeySet())
+            {
+                buttonCheckQuota.Visible = true;
+            } else
+            {
+                buttonGenerateNumber.Location = new Point(165, 377);
+            }
         }
 
 
@@ -122,10 +125,12 @@ namespace Randee
             buttonGenerateNumber.Enabled = false; // Lock the button
             ChangeCursor();
 
+            string number;
+
             /* Generates a true random number */
             if(settingsForm.IsAPIKeySet())
             {
-                string number = ShuffleHeaven.GetTrueRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
+                number = ShuffleHeaven.GetTrueRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
 
                 labelNumberDisplay.Text = 
                     inputNumberOfNumbers.Value > 1 ? 
@@ -153,22 +158,18 @@ namespace Randee
 
 
             /* Generates a pseudo random number */
-            if (inputMinRange.Value > Byte.MaxValue || inputMaxRange.Value > Byte.MaxValue)
-            {
-                string number = ShuffleHeaven.GenerateNumber((int) inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value).ToString();
+            number = ShuffleHeaven.GenerateNumber((int) inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value).ToString();
 
-                labelNumberDisplay.Text = 
-                    inputNumberOfNumbers.Value > 1 ? 
-                    "Your random numbers are: " : "Your random number is: " + number;
+            labelNumberDisplay.Text =
+                inputNumberOfNumbers.Value > 1 ?
+                "Your random numbers are: " : "Your random number is: " + number;
 
-                labelMultipleNumbers.Text = 
-                    inputNumberOfNumbers.Value > 1 ? 
-                    number : String.Empty;
+            labelMultipleNumbers.Text =
+                inputNumberOfNumbers.Value > 1 ?
+                number : String.Empty;
+            ShowNumber();
 
-                ShowNumber();
-
-                AddToLog(number);
-            }
+            AddToLog(number);
 
             buttonGenerateNumber.Enabled = true; // Unlock the button
         }
@@ -177,7 +178,18 @@ namespace Randee
 
         private void buttonCheckQuota_Click(object sender, EventArgs e)
         {
+            ChangeCursor();
+            ClearErrorMessage();
             HideNumber();
+
+            ShuffleHeaven.GetUsage();
+
+            if (ShuffleHeaven.GetExceptionThrown())
+            {
+                labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nCannot retrieve the Daily Quota.";
+
+                return;
+            }
 
             labelBitsLeft.Text = "Bits Left: " + ShuffleHeaven.GetBitsLeft();
             labelRequestsLeft.Text = "Requests Left: " + ShuffleHeaven.GetRequestsLeft();

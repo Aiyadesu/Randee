@@ -260,6 +260,7 @@
             this.buttonCheckQuota.TabIndex = 19;
             this.buttonCheckQuota.Text = "Check Quota";
             this.buttonCheckQuota.UseVisualStyleBackColor = true;
+            this.buttonCheckQuota.Visible = false;
             this.buttonCheckQuota.Click += new System.EventHandler(this.buttonCheckQuota_Click);
             // 
             // labelQuotaTitle
