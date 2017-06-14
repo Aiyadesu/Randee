@@ -45,6 +45,10 @@
             this.buttonClose = new System.Windows.Forms.PictureBox();
             this.windowMask = new System.Windows.Forms.PictureBox();
             this.labelErrorMessage = new System.Windows.Forms.Label();
+            this.buttonCheckQuota = new System.Windows.Forms.Button();
+            this.labelQuotaTitle = new System.Windows.Forms.Label();
+            this.labelBitsLeft = new System.Windows.Forms.Label();
+            this.labelRequestsLeft = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.inputMaxRange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputMinRange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.inputNumberOfNumbers)).BeginInit();
@@ -57,11 +61,11 @@
             // buttonGenerateNumber
             // 
             this.buttonGenerateNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonGenerateNumber.Location = new System.Drawing.Point(167, 380);
+            this.buttonGenerateNumber.Location = new System.Drawing.Point(81, 377);
             this.buttonGenerateNumber.Name = "buttonGenerateNumber";
-            this.buttonGenerateNumber.Size = new System.Drawing.Size(100, 35);
+            this.buttonGenerateNumber.Size = new System.Drawing.Size(100, 57);
             this.buttonGenerateNumber.TabIndex = 1;
-            this.buttonGenerateNumber.Text = "Generate!";
+            this.buttonGenerateNumber.Text = "Generate Number";
             this.buttonGenerateNumber.UseVisualStyleBackColor = true;
             this.buttonGenerateNumber.Click += new System.EventHandler(this.buttonGenerateNumber_Click);
             // 
@@ -247,6 +251,47 @@
             this.labelErrorMessage.Text = "Error Text";
             this.labelErrorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // buttonCheckQuota
+            // 
+            this.buttonCheckQuota.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.buttonCheckQuota.Location = new System.Drawing.Point(254, 377);
+            this.buttonCheckQuota.Name = "buttonCheckQuota";
+            this.buttonCheckQuota.Size = new System.Drawing.Size(100, 57);
+            this.buttonCheckQuota.TabIndex = 19;
+            this.buttonCheckQuota.Text = "Check Quota";
+            this.buttonCheckQuota.UseVisualStyleBackColor = true;
+            this.buttonCheckQuota.Click += new System.EventHandler(this.buttonCheckQuota_Click);
+            // 
+            // labelQuotaTitle
+            // 
+            this.labelQuotaTitle.AutoSize = true;
+            this.labelQuotaTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelQuotaTitle.Location = new System.Drawing.Point(556, 69);
+            this.labelQuotaTitle.Name = "labelQuotaTitle";
+            this.labelQuotaTitle.Size = new System.Drawing.Size(150, 24);
+            this.labelQuotaTitle.TabIndex = 20;
+            this.labelQuotaTitle.Text = "Daily Quota Stats";
+            // 
+            // labelBitsLeft
+            // 
+            this.labelBitsLeft.AutoSize = true;
+            this.labelBitsLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelBitsLeft.Location = new System.Drawing.Point(501, 142);
+            this.labelBitsLeft.Name = "labelBitsLeft";
+            this.labelBitsLeft.Size = new System.Drawing.Size(103, 24);
+            this.labelBitsLeft.TabIndex = 21;
+            this.labelBitsLeft.Text = "Bits Left: 14";
+            // 
+            // labelRequestsLeft
+            // 
+            this.labelRequestsLeft.AutoSize = true;
+            this.labelRequestsLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.labelRequestsLeft.Location = new System.Drawing.Point(501, 182);
+            this.labelRequestsLeft.Name = "labelRequestsLeft";
+            this.labelRequestsLeft.Size = new System.Drawing.Size(153, 24);
+            this.labelRequestsLeft.TabIndex = 22;
+            this.labelRequestsLeft.Text = "Requests Left: 14";
+            // 
             // Randee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -254,6 +299,10 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.HighlightText;
             this.ClientSize = new System.Drawing.Size(840, 473);
+            this.Controls.Add(this.labelRequestsLeft);
+            this.Controls.Add(this.labelBitsLeft);
+            this.Controls.Add(this.labelQuotaTitle);
+            this.Controls.Add(this.buttonCheckQuota);
             this.Controls.Add(this.labelErrorMessage);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.buttonHome);
@@ -305,6 +354,10 @@
         private System.Windows.Forms.PictureBox buttonHome;
         private System.Windows.Forms.PictureBox buttonSettings;
         private System.Windows.Forms.Label labelErrorMessage;
+        private System.Windows.Forms.Button buttonCheckQuota;
+        private System.Windows.Forms.Label labelQuotaTitle;
+        private System.Windows.Forms.Label labelBitsLeft;
+        private System.Windows.Forms.Label labelRequestsLeft;
     }
 }
 

@@ -21,7 +21,6 @@ namespace Randee
         /* Random.org Information */
         private static int bitsLeft = 250000;
         private static int requestsLeft = 1000;
-        private static int advisoryDelay = 1000;
 
         private static string numbers;
         private static DateTime sessionStartTime = DateTime.Now.ToUniversalTime();
@@ -134,6 +133,21 @@ namespace Randee
 
 
 
+        /* Returns information related to the usage of the set API Key. */
+        public static void GetUsage()
+        {
+            string requestID = "1414";
+
+            string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
+                "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
+                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + requestID + "}");
+
+            TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
+
+            SetBitsLeft(tro.result.bitsLeft);
+            SetRequestsLeft(tro.result.requestsLeft);
+        }
+
         /*
          * Checks that the random number would be generated if each number had an equal probability of occuring.
          * 
@@ -222,6 +236,10 @@ namespace Randee
 
             TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(response);
 
+            SetBitsLeft(tro.result.bitsLeft);
+            SetRequestsLeft(tro.result.requestsLeft);
+            SetAdvisedRequestTime(tro.result.advisoryDelay);
+
             foreach (int number in tro.result.random.data)
             {
                 numbers += number + ",";
@@ -232,52 +250,8 @@ namespace Randee
 
 
 
-        /* 
-         * DEPRECATED!
-         * Avoid reading this function, just trust it works.
-         * This is why people use JSON.NET.
-         */
-        private static void ExtractInformationFromResponse(string response)
-        {
-            /* Store the numbers data */
-            string numbersData = response.Remove(response.IndexOf("]"));
-
-            numbers = numbersData.Substring(response.IndexOf("[") + 1);
-
-
-
-            /* Stores the 'usage' information */
-            int usageInfoStartIndex = response.IndexOf("\"bitsLeft");
-            int usageInfoEndIndex = response.LastIndexOf(",");
-
-            // Separates the 'usage' from the response
-            string usageInfo = response.Substring(usageInfoStartIndex, usageInfoEndIndex - usageInfoStartIndex);
-
-            // Separates the 'bitsLeft' info from the response
-            string bitsLeftStr = usageInfo.Remove(usageInfo.IndexOf(","));
-            usageInfo = usageInfo.Substring(usageInfo.IndexOf(",") + 1);
-
-            // Separates the 'requestsLeft' info from the response
-            string requestsLeftStr = usageInfo.Remove(usageInfo.IndexOf(","));
-
-            // Separates the 'advisoryDelay' info from the response
-            string advisoryDelayStr = usageInfo.Substring(usageInfo.IndexOf(",") + 1);
-            advisoryDelayStr = advisoryDelayStr.Remove(advisoryDelayStr.Length - 1);
- 
-
-
-            /* Store the info as the proper data type */
-            bitsLeft = Int32.Parse(bitsLeftStr.Substring(bitsLeftStr.IndexOf(":") + 1));
-            requestsLeft = Int32.Parse(requestsLeftStr.Substring(requestsLeftStr.IndexOf(":") + 1));
-            advisoryDelay = Int32.Parse(advisoryDelayStr.Substring(advisoryDelayStr.IndexOf(":") + 1));
-
-            SetAdvisedRequestTime();
-        }
-
-
-
         /* Getters & Setters */
-        private static int GetBitsLeft()
+        public static int GetBitsLeft()
         {
             return bitsLeft;
         }
@@ -289,7 +263,7 @@ namespace Randee
 
 
 
-        private static int GetRequestsLeft()
+        public static int GetRequestsLeft()
         {
             return requestsLeft;
         }
@@ -301,24 +275,12 @@ namespace Randee
 
 
 
-        private static int GetAdvisoryDelay()
-        {
-            return advisoryDelay;
-        }
-
-        private static void SetAdvisoryDelay(int advisedDelay)
-        {
-            advisoryDelay = advisedDelay;
-        }
-
-
-
         private static DateTime GetAdvisedRequestTime()
         {
             return advisedRequestTime;
         }
 
-        private static void SetAdvisedRequestTime()
+        private static void SetAdvisedRequestTime(int advisoryDelay)
         {
             advisedRequestTime = DateTime.Now.ToUniversalTime().AddMilliseconds(advisoryDelay);
         }

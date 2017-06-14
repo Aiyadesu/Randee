@@ -54,6 +54,11 @@ namespace Randee
         {
             InitializeComponent();
 
+            if (settingsForm.IsAPIKeySet())
+            {
+                ShuffleHeaven.GetUsage();
+            }
+
             /* Set the "dark" theme of the application */
             BackColor = TITLE_BAR_BACK_COLOUR;
 
@@ -64,6 +69,9 @@ namespace Randee
             labelFrom.ForeColor            = TEXT_COLOUR;
             labelTo.ForeColor              = TEXT_COLOUR;
             labelNumberOfNumbers.ForeColor = TEXT_COLOUR;
+            labelQuotaTitle.ForeColor      = TEXT_COLOUR;
+            labelBitsLeft.ForeColor        = TEXT_COLOUR;
+            labelRequestsLeft.ForeColor    = TEXT_COLOUR;
 
             // Set the input colours
             inputMinRange.BackColor        = WINDOW_BACK_COLOUR;
@@ -78,6 +86,9 @@ namespace Randee
             buttonGenerateNumber.BackColor = WINDOW_BACK_COLOUR;
             buttonGenerateNumber.ForeColor = INPUT_COLOUR;
 
+            buttonCheckQuota.BackColor     = WINDOW_BACK_COLOUR;
+            buttonCheckQuota.ForeColor     = INPUT_COLOUR;
+
             // Set the result colours
             labelNumberDisplay.ForeColor   = RESULTS_COLOUR;
             labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
@@ -87,6 +98,7 @@ namespace Randee
 
             // Clear the default text
             ClearNumbers();
+            HideQuota();
             ClearErrorMessage();
 
             UpdateTitle(TITLE_HOME);
@@ -105,6 +117,8 @@ namespace Randee
         private void buttonGenerateNumber_Click(object sender, EventArgs e)
         {
             ClearErrorMessage();
+            HideQuota();
+            HideNumber();
             buttonGenerateNumber.Enabled = false; // Lock the button
             ChangeCursor();
 
@@ -126,6 +140,8 @@ namespace Randee
                 {
                     labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nNumber provided is not true random";
                 }
+
+                ShowNumber();
 
                 AddToLog(number);
 
@@ -149,10 +165,24 @@ namespace Randee
                     inputNumberOfNumbers.Value > 1 ? 
                     number : String.Empty;
 
+                ShowNumber();
+
                 AddToLog(number);
             }
 
             buttonGenerateNumber.Enabled = true; // Unlock the button
+        }
+
+
+
+        private void buttonCheckQuota_Click(object sender, EventArgs e)
+        {
+            HideNumber();
+
+            labelBitsLeft.Text = "Bits Left: " + ShuffleHeaven.GetBitsLeft();
+            labelRequestsLeft.Text = "Requests Left: " + ShuffleHeaven.GetRequestsLeft();
+
+            ShowQuota();
         }
 
 
@@ -321,6 +351,40 @@ namespace Randee
         private void ClearErrorMessage()
         {
             labelErrorMessage.Text = String.Empty;
+        }
+
+
+
+        private void HideQuota()
+        {
+            labelQuotaTitle.Visible = false;
+            labelBitsLeft.Visible = false;
+            labelRequestsLeft.Visible = false;
+        }
+
+
+
+        private void ShowQuota()
+        {
+            labelQuotaTitle.Visible = true;
+            labelBitsLeft.Visible = true;
+            labelRequestsLeft.Visible = true;
+        }
+
+
+
+        private void HideNumber()
+        {
+            labelNumberDisplay.Visible = false;
+            labelMultipleNumbers.Visible = false;
+        }
+
+
+
+        private void ShowNumber()
+        {
+            labelNumberDisplay.Visible = true;
+            labelMultipleNumbers.Visible = true;
         }
 
 
