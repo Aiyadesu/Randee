@@ -110,8 +110,6 @@ namespace Randee
          */
         public static string GenerateNumber(int numberOfNumbers, int minRange, int maxRange)
         {
-            string numbers = "";
-
             System.Random sprng = new System.Random();
 
             if(numberOfNumbers == 1)
@@ -136,16 +134,24 @@ namespace Randee
         /* Returns information related to the usage of the set API Key. */
         public static void GetUsage()
         {
+            SetExceptionThrown(false);
             string requestID = "1414";
 
-            string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
+            try
+            {
+                string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
                 "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
                 + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + requestID + "}");
 
-            TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
+                TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
 
-            SetBitsLeft(tro.result.bitsLeft);
-            SetRequestsLeft(tro.result.requestsLeft);
+                SetBitsLeft(tro.result.bitsLeft);
+                SetRequestsLeft(tro.result.requestsLeft);
+            }
+            catch (WebException)
+            {
+                SetExceptionThrown(true);
+            }
         }
 
         /*
