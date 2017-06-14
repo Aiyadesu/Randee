@@ -56,7 +56,7 @@ namespace Randee
 
 
             /* Prepare the labels based on whether the user environment variable for the API Key exists */
-            labelSaveStatus.Text = "";
+            labelSaveStatus.Text = String.Empty;
 
 
 
@@ -95,9 +95,9 @@ namespace Randee
         // Resets the text box colour
         private void textboxAPIKey_Enter(object sender, EventArgs e)
         {
-            textboxAPIKey.Text = "";
+            textboxAPIKey.Text = String.Empty;
 
-            ChangeSaveStatusLabel(0, 0, Randee.TEXT_COLOUR, "");
+            ChangeSaveStatusLabel(0, 0, Randee.TEXT_COLOUR, String.Empty);
         }
 
 
@@ -178,7 +178,7 @@ namespace Randee
             using (StreamReader streamReader = File.OpenText(settingsPath))
             {
 
-                string currentLine = "";
+                string currentLine = String.Empty;
 
                 while ((currentLine = streamReader.ReadLine()) != null)
                 {
@@ -239,7 +239,7 @@ namespace Randee
         private void SaveKey()
         {
             /* Check for null input */
-            if(textboxAPIKey.Text.Trim() == "")
+            if(textboxAPIKey.Text.Trim() == String.Empty)
             {
                 ChangeSaveStatusLabel(115, 124, Color.Red, "Please enter your key.");
 
