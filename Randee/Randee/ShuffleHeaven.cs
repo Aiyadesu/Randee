@@ -42,67 +42,6 @@ namespace Randee
 
         /* Main Functions */
 
-        /*
-         * Generates a number between the range of 'minRange' and 'maxRange'.
-         * 
-         * 'minRange' is the smallest number that can be generated.
-         * 'maxRange' is the largest number that can be generated.
-         */
-        public static byte GenerateNumber(byte minRange, byte maxRange)
-        {
-            if(minRange <= 0 || maxRange <= 0)
-            {
-                throw new ArgumentOutOfRangeException("maxRange is invalid! Cannot be less than or equal to 0");
-            }
-
-            // Swaps the 'minRange' and 'maxRange' values, if 'minRange' is larger than 'maxRange'
-            if(minRange > maxRange)
-            {
-                byte temp = minRange;
-
-                minRange = maxRange;
-                maxRange = temp;
-            }
-
-            // Create a byte array to hold the random value
-            byte[] randomNumber = new byte[1];
-
-            // Simplies the min and max values to a range starting from 1
-            byte range = (byte)(maxRange - minRange + 1);
-
-            /* Generate a random number that is considered "fair" */
-            do
-            {
-                // Fill the array with a random value.
-                crng.GetBytes(randomNumber);
-            }
-
-            while (!IsUniformlyDistributed(randomNumber[0], range)); 
-
-            return (byte)((randomNumber[0] % range) + minRange); // Offsets the simplied range starting from 1 to start from the 'minRange'
-        }
-
-        /*
-         * Generates multiple random numbers between the range of 'minRange' and 'maxRange'.
-         * 
-         * 'rolls' is the number of times a random number will be generated.
-         * 'minRange' is the smallest number that can be generated.
-         * 'maxRange' is the largest number that can be generated.
-         */
-        public static byte[] GenerateNumber(byte rolls, byte minRange, byte maxRange)
-        {
-            // Create a byte array to hold the results
-            byte[] results = new byte[rolls];
-
-            // Stores a random number in an array
-            for(int roll = 0; roll < rolls; roll++)
-            {
-                results[roll] = GenerateNumber(minRange, maxRange);
-            }
-
-            return results;
-        }
-
 
 
         /*
@@ -119,69 +58,6 @@ namespace Randee
             }
 
             return result;
-        }
-
-
-
-        /* Helper Functions */
-
-
-
-        /* Returns information related to the usage of the set API Key. */
-        public static void GetUsage()
-        {
-            SetExceptionThrown(false);
-            string requestID = "1414";
-
-            try
-            {
-                string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
-                "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
-                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + requestID + "}");
-
-                TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
-
-                SetBitsLeft(tro.result.bitsLeft);
-                SetRequestsLeft(tro.result.requestsLeft);
-            }
-            catch (WebException)
-            {
-                SetExceptionThrown(true);
-            }
-        }
-
-        /*
-         * Checks that the random number would be generated if each number had an equal probability of occuring.
-         * 
-         * Source: https://msdn.microsoft.com/en-us/library/system.security.cryptography.rngcryptoserviceprovider(v=vs.110).aspx
-         */
-        private static bool IsUniformlyDistributed(byte roll, byte numSides)
-        {
-            int fullSetsOfValues = Byte.MaxValue / numSides;
-
-            return roll < numSides * fullSetsOfValues;
-        }
-
-
-
-        /*
-         * Generates a random seed
-         */
-        private static int GenerateSeed()
-        {
-            // Generates a cryptographically secure random number between the range of 0 and 255
-            byte[] randomNumber = new byte[1];
-
-            crng.GetBytes(randomNumber);
-
-            // Generates a non-negative range from two pseudo random numbers
-            int lowerLimit = prng.Next(int.MaxValue);
-            int upperLimit = prng.Next(lowerLimit, int.MaxValue);
-
-            // Create a seed using the pseudo random range, the current time and the cryptographically secure random number
-            long seed = (prng.Next(lowerLimit, upperLimit) + DateTime.Now.Ticks) * (randomNumber[0] + 1);
-
-            return (int) seed;
         }
 
 
@@ -248,6 +124,31 @@ namespace Randee
             }
 
             return tro.result.random.data;
+        }
+
+
+
+        /* Returns information related to the usage of the set API Key. */
+        public static void GetUsage()
+        {
+            SetExceptionThrown(false);
+            string requestID = "1414";
+
+            try
+            {
+                string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
+                "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
+                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + requestID + "}");
+
+                TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
+
+                SetBitsLeft(tro.result.bitsLeft);
+                SetRequestsLeft(tro.result.requestsLeft);
+            }
+            catch (WebException)
+            {
+                SetExceptionThrown(true);
+            }
         }
 
 
