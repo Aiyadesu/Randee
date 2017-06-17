@@ -83,14 +83,14 @@ namespace Randee
         /// <param name="maxRange"></param>
         public static List<int> GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
-            numbers = "";
+            numbers = String.Empty;
             SetExceptionThrown(false);
 
             if (GetRequestsLeft() == 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
             if (GetBitsLeft() <= 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
             if (GetAdvisedRequestTime() != defaultDateTime && DateTime.Now.ToUniversalTime() < GetAdvisedRequestTime()) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
 
-            string response = "";
+            string response = String.Empty;
 
             try
             {
