@@ -14,8 +14,9 @@ namespace Randee
     public partial class Settings : Form
     {
         /* Class Constants */
-        private const string SETTINGS_API_KEY = "RANDOM_ORG_API = ";
-        private const string SETTINGS_HISTORY = "NUMBER_HISTORY = ";
+        private const string SETTINGS_API_KEY   = "RANDOM_ORG_API = ";
+        private const string SETTINGS_HISTORY   = "NUMBER_HISTORY = ";
+        private const string SETTINGS_SEPERATOR = "SEPERATOR = ";
 
         private const char SETTINGS_OFF = '0';
         private const char SETTINGS_ON = '1';
@@ -50,11 +51,6 @@ namespace Randee
             buttonSaveKey.BackColor = Randee.WINDOW_BACK_COLOUR;
             buttonSaveKey.ForeColor = Randee.INPUT_COLOUR;
 
-            /* Initialise class members */
-            seperator = " "; 
-
-
-
             /* Prepare the labels based on whether the user environment variable for the API Key exists */
             labelSaveStatus.Text = String.Empty;
 
@@ -68,10 +64,12 @@ namespace Randee
 
 
 
+            /* Initialise class members */
             ReadSettingsFile();
 
             /* Setup the GUI */
             checkBoxKeepHistory.Checked = keepHistory;
+            comboBoxSeperator.Text      = seperator;
 
             if (!IsAPIKeySet())
             {
@@ -143,6 +141,8 @@ namespace Randee
         {
             SetSeperator(comboBoxSeperator.Text);
 
+            UpdateSettings(SETTINGS_SEPERATOR + GetSeperator());
+
             labelSeperatorExample.Text = "Example Output) 1" + seperator + "2" + seperator + "3" + seperator + "4.";
         }
 
@@ -157,9 +157,10 @@ namespace Randee
         /// </summary>
         private void CreateSettingsFile()
         {
-            // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
-            string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n" 
-                            + SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n";
+            // Adds a file with default settings called 'settings.txt'
+            string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n"
+                            + SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n"
+                            + SETTINGS_SEPERATOR + GetSeperator() + "\r\n";
 
             WriteToSettingsFile(settings);
         }
@@ -186,11 +187,20 @@ namespace Randee
                     settings += currentLine + "\r\n";
 
                     /* Set the members based on the previous settings */
-                    // Retrives the previous settings for whether or not to keep a history or generated numbers
-                    if(currentLine.Contains(SETTINGS_HISTORY))
+                    string caseSwitch = currentLine.Remove(currentLine.Length - 1);
+
+                    switch(caseSwitch)
                     {
-                        SetKeepHistory(currentLine[currentLine.Length - 1] == SETTINGS_ON);
-                        continue;
+                        case SETTINGS_API_KEY:
+                            break;
+                        case SETTINGS_HISTORY:
+                            SetKeepHistory(currentLine[currentLine.Length - 1] == SETTINGS_ON);
+                            break;
+                        case SETTINGS_SEPERATOR:
+                            SetSeperator(currentLine[currentLine.Length - 1].ToString());
+                            break;
+                        default:
+                            break;
                     }
                 }
 
