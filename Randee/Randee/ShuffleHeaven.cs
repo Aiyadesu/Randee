@@ -19,7 +19,8 @@ namespace Randee
         private static WebClient webClient              = new WebClient();
 
         /* 'ShuffleHeaven' constants */
-        private static readonly string REQUEST_ID       = "1414";
+        private static readonly string REQUEST_ID           = "1414";
+        private static readonly string ENVIRONMENT_VAR_NAME = "RANDOM_ORG_API";
 
         /* Random.org Information */
         private static int bitsLeft;
@@ -95,7 +96,7 @@ namespace Randee
             {
                 response = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
                 "{\"jsonrpc\":\"2.0\",\"method\":\"generateIntegers\",\"params\":{\"apiKey\":\""
-                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\",\"n\":"
+                + Environment.GetEnvironmentVariable(ENVIRONMENT_VAR_NAME, EnvironmentVariableTarget.User) + "\",\"n\":"
                 + numberOfNumbers.ToString() + ",\"min\":" + minRange.ToString() + ",\"max\":" + maxRange.ToString()
                 + ",\"replacement\":true,\"base\":10},\"id\":" + REQUEST_ID + "}");
             }
@@ -126,7 +127,7 @@ namespace Randee
             {
                 string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
                 "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
-                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + REQUEST_ID + "}");
+                + Environment.GetEnvironmentVariable(ENVIRONMENT_VAR_NAME, EnvironmentVariableTarget.User) + "\"},\"id\":" + REQUEST_ID + "}");
 
                 TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
 
