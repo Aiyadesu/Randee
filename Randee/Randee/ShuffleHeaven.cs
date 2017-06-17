@@ -18,6 +18,9 @@ namespace Randee
         private static System.Random prng               = new System.Random();
         private static WebClient webClient              = new WebClient();
 
+        /* 'ShuffleHeaven' constants */
+        private static readonly string REQUEST_ID       = "1414";
+
         /* Random.org Information */
         private static int bitsLeft;
         private static int requestsLeft;
@@ -86,9 +89,6 @@ namespace Randee
             if (GetBitsLeft() <= 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
             if (GetAdvisedRequestTime() != defaultDateTime && DateTime.Now.ToUniversalTime() < GetAdvisedRequestTime()) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
 
-           
-            string requestID = "1414";
-
             string response = "";
 
             try
@@ -97,7 +97,7 @@ namespace Randee
                 "{\"jsonrpc\":\"2.0\",\"method\":\"generateIntegers\",\"params\":{\"apiKey\":\""
                 + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\",\"n\":"
                 + numberOfNumbers.ToString() + ",\"min\":" + minRange.ToString() + ",\"max\":" + maxRange.ToString()
-                + ",\"replacement\":true,\"base\":10},\"id\":" + requestID + "}");
+                + ",\"replacement\":true,\"base\":10},\"id\":" + REQUEST_ID + "}");
             }
             catch (WebException)
             {
@@ -112,11 +112,6 @@ namespace Randee
             SetRequestsLeft(tro.result.requestsLeft);
             SetAdvisedRequestTime(tro.result.advisoryDelay);
 
-            foreach (int number in tro.result.random.data)
-            {
-                numbers += number + ",";
-            }
-
             return tro.result.random.data;
         }
 
@@ -126,13 +121,12 @@ namespace Randee
         public static void GetUsage()
         {
             SetExceptionThrown(false);
-            string requestID = "1414";
 
             try
             {
                 string usage = webClient.UploadString("https://api.random.org/json-rpc/1/invoke",
                 "{\"jsonrpc\":\"2.0\",\"method\":\"getUsage\",\"params\":{\"apiKey\":\""
-                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + requestID + "}");
+                + Environment.GetEnvironmentVariable("RANDOM_ORG_API", EnvironmentVariableTarget.User) + "\"},\"id\":" + REQUEST_ID + "}");
 
                 TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(usage);
 
