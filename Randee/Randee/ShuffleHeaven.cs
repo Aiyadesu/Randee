@@ -48,7 +48,7 @@ namespace Randee
 
 
         /*
-         * Generates a pseudo random number between the range of 'minRange' and 'maxRange'
+         * Generates 'numberOfNumbers' pseudo random number(s) between the range of 'minRange' and 'maxRange'
          */
         public static List<int> GeneratePseudoRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
