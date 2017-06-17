@@ -158,7 +158,7 @@ namespace Randee
         private void CreateSettingsFile()
         {
             // Adds whether the "RANDOM_ORG_API" environment variable is found or not to the settings
-            string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_OFF : SETTINGS_ON) + "\r\n" 
+            string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n" 
                             + SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n";
 
             WriteToSettingsFile(settings);
@@ -183,7 +183,7 @@ namespace Randee
                 while ((currentLine = streamReader.ReadLine()) != null)
                 {
                     // Store the current line
-                    settings += currentLine;
+                    settings += currentLine + "\r\n";
 
                     /* Set the members based on the previous settings */
                     // Retrives the previous settings for whether or not to keep a history or generated numbers
