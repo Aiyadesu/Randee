@@ -92,12 +92,12 @@ namespace Randee
             labelErrorMessage.ForeColor    = ERROR_COLOUR;
 
             // Clear the default text
-            ClearNumbers();
-            HideQuota();
-            ClearErrorMessage();
+            HideOutputScreen();
 
+            // Set the 'Title' text
             UpdateTitle(TITLE_HOME);
 
+            // Set the 'Check Quota' button default properties if necessary
             if(settingsForm.IsAPIKeySet())
             {
                 buttonCheckQuota.Visible = true;
@@ -119,11 +119,9 @@ namespace Randee
          */
         private void buttonGenerateNumber_Click(object sender, EventArgs e)
         {
-            ClearErrorMessage();
-            HideQuota();
-            HideNumber();
-            buttonGenerateNumber.Enabled = false; // Lock the button
             ChangeCursor();
+            HideOutputScreen();
+            buttonGenerateNumber.Enabled = false; // Lock the button
 
             string number;
 
@@ -179,8 +177,7 @@ namespace Randee
         private void buttonCheckQuota_Click(object sender, EventArgs e)
         {
             ChangeCursor();
-            ClearErrorMessage();
-            HideNumber();
+            HideOutputScreen();
 
             ShuffleHeaven.GetUsage();
 
@@ -283,7 +280,7 @@ namespace Randee
         /* 'Settings' button functions */
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            ClearNumbers();
+            HideOutputScreen();
             UpdateTitle(TITLE_SETTINGS);
 
             settingsForm.BackColor = BackColor;
@@ -352,17 +349,9 @@ namespace Randee
 
 
 
-        private void ClearNumbers()
+        private void HideErrorMessage()
         {
-            labelNumberDisplay.Text   = String.Empty;
-            labelMultipleNumbers.Text = String.Empty;
-        }
-
-
-
-        private void ClearErrorMessage()
-        {
-            labelErrorMessage.Text = String.Empty;
+            labelErrorMessage.Visible = false;
         }
 
 
@@ -397,6 +386,15 @@ namespace Randee
         {
             labelNumberDisplay.Visible = true;
             labelMultipleNumbers.Visible = true;
+        }
+
+
+
+        private void HideOutputScreen()
+        {
+            HideQuota();
+            HideNumber();
+            HideErrorMessage();
         }
 
 
