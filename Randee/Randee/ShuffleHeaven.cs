@@ -19,8 +19,8 @@ namespace Randee
         private static WebClient webClient              = new WebClient();
 
         /* Random.org Information */
-        private static int bitsLeft = 250000;
-        private static int requestsLeft = 1000;
+        private static int bitsLeft;
+        private static int requestsLeft;
 
         private static string numbers;
         private static DateTime sessionStartTime = DateTime.Now.ToUniversalTime();
@@ -81,12 +81,6 @@ namespace Randee
         {
             numbers = "";
             SetExceptionThrown(false);
-
-            if(DateTime.Now.ToUniversalTime().Day > sessionStartTime.Day)
-            {
-                SetRequestsLeft(1000);
-                SetBitsLeft(250000);
-            }
 
             if (GetRequestsLeft() == 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
             if (GetBitsLeft() <= 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
