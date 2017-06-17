@@ -23,6 +23,9 @@ namespace Randee
         private const string TITLE_HOME = "Randee - Home";
         private const string TITLE_SETTINGS = "Randee - Settings";
 
+        private const string ERROR_NUMBER = "Number provided is not true random.";
+        private const string ERROR_QUOTA = "Cannot retrieve the Daily Quota.";
+
         /* Other Pages/Forms */
         private Settings settingsForm = new Settings();
 
@@ -65,8 +68,6 @@ namespace Randee
             labelTo.ForeColor              = TEXT_COLOUR;
             labelNumberOfNumbers.ForeColor = TEXT_COLOUR;
             labelQuotaTitle.ForeColor      = TEXT_COLOUR;
-            labelBitsLeft.ForeColor        = TEXT_COLOUR;
-            labelRequestsLeft.ForeColor    = TEXT_COLOUR;
 
             // Set the input colours
             inputMinRange.BackColor        = WINDOW_BACK_COLOUR;
@@ -87,6 +88,9 @@ namespace Randee
             // Set the result colours
             labelNumberDisplay.ForeColor   = RESULTS_COLOUR;
             labelMultipleNumbers.ForeColor = RESULTS_COLOUR;
+
+            labelBitsLeft.ForeColor        = RESULTS_COLOUR;
+            labelRequestsLeft.ForeColor    = RESULTS_COLOUR;
 
             // Set the error message colour
             labelErrorMessage.ForeColor    = ERROR_COLOUR;
@@ -123,53 +127,42 @@ namespace Randee
             HideOutputScreen();
             buttonGenerateNumber.Enabled = false; // Lock the button
 
-            string number;
+            List<int> generatedNumbers;
+            string formattedNumbers = String.Empty;
 
-            /* Generates a true random number */
-            if(settingsForm.IsAPIKeySet())
+
+
+            /* Generates a true or pseudo random number, depending on whether the Random.org API Key is set or not */
+            if (settingsForm.IsAPIKeySet())
             {
-                number = ShuffleHeaven.GetTrueRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
-
-                labelNumberDisplay.Text = 
-                    inputNumberOfNumbers.Value > 1 ? 
-                    "Your random numbers are: " : "Your random number is: " + number;
-
-                labelMultipleNumbers.Text =
-                    inputNumberOfNumbers.Value > 1 ?
-                    number : String.Empty;
+                generatedNumbers = ShuffleHeaven.GetTrueRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
 
                 // Shows an error message if 'ShuffleHeaven' throws an exception
-                if(ShuffleHeaven.GetExceptionThrown())
-                {
-                    labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nNumber provided is not true random";
-                }
-
-                ShowNumber();
-
-                AddToLog(number);
-
-                buttonGenerateNumber.Enabled = true; // Unlock the button
-
-                return;
+                HasShuffleHeavenThrownException(ERROR_NUMBER);
+            }
+            else
+            {
+                /* Generates a pseudo random number */
+                generatedNumbers = ShuffleHeaven.GeneratePseudoRandomNumber((int)inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value);
             }
 
 
 
-            /* Generates a pseudo random number */
-            number = ShuffleHeaven.GenerateNumber((int) inputNumberOfNumbers.Value, (int)inputMinRange.Value, (int)inputMaxRange.Value).ToString();
+            formattedNumbers = ConvertListIntsToString(generatedNumbers);
 
             labelNumberDisplay.Text =
                 inputNumberOfNumbers.Value > 1 ?
-                "Your random numbers are: " : "Your random number is: " + number;
+                "Your random numbers are: " : "Your random number is: " + formattedNumbers; ;
 
             labelMultipleNumbers.Text =
                 inputNumberOfNumbers.Value > 1 ?
-                number : String.Empty;
+                formattedNumbers : String.Empty;
+
             ShowNumber();
 
-            AddToLog(number);
+            AddToLog(formattedNumbers);
 
-            buttonGenerateNumber.Enabled = true; // Unlock the button
+            buttonGenerateNumber.Enabled = true; // Unlock the button   
         }
 
 
@@ -181,17 +174,13 @@ namespace Randee
 
             ShuffleHeaven.GetUsage();
 
-            if (ShuffleHeaven.GetExceptionThrown())
+            if (!HasShuffleHeavenThrownException(ERROR_QUOTA))
             {
-                labelErrorMessage.Text = "An issue with the connectivity was detected. \r\nCannot retrieve the Daily Quota.";
+                labelBitsLeft.Text = "Bits Left: " + ShuffleHeaven.GetBitsLeft();
+                labelRequestsLeft.Text = "Requests Left: " + ShuffleHeaven.GetRequestsLeft();
 
-                return;
+                ShowQuota();
             }
-
-            labelBitsLeft.Text = "Bits Left: " + ShuffleHeaven.GetBitsLeft();
-            labelRequestsLeft.Text = "Requests Left: " + ShuffleHeaven.GetRequestsLeft();
-
-            ShowQuota();
         }
 
 
@@ -356,6 +345,13 @@ namespace Randee
 
 
 
+        private void ShowErrorMessage()
+        {
+            labelErrorMessage.Visible = true;
+        }
+
+
+
         private void HideQuota()
         {
             labelQuotaTitle.Visible = false;
@@ -404,6 +400,51 @@ namespace Randee
             Cursor.Current = 
                 Cursor.Current == Cursors.Default ? 
                 Cursors.WaitCursor : Cursors.Default;
+        }
+
+
+        /// <summary>
+        /// Checks whether an exception was thrown by 'ShuffleHeaven' 
+        /// and sets the error message given by 'errorMesssage' parameter.
+        /// 
+        /// Call this function after a function is called from 'ShuffleHeaven' that
+        /// retrieves a response from Random.org.
+        /// </summary>
+        /// <param name="errorMessage">The string that lets the user know what is wrong.</param>
+        /// <returns></returns>
+        private bool HasShuffleHeavenThrownException(string errorMessage)
+        {
+            bool hasException = ShuffleHeaven.GetExceptionThrown();
+
+            if (hasException)
+            {
+                labelErrorMessage.Text = 
+                    "An issue with the connectivity was detected. \r\n" + errorMessage;
+                ShowErrorMessage();
+            }
+
+            return hasException;
+        }
+
+
+        /// <summary>
+        /// Formats the numbers within the list with the specified seperator in the 'Settings'
+        /// and returns the string represntation.
+        /// </summary>
+        /// <param name="list">The list to convert.</param>
+        /// <returns></returns>
+        private string ConvertListIntsToString(List<int> list)
+        {
+            string newString = String.Empty;
+
+            foreach (int integer in list)
+            {
+                newString += integer.ToString() + settingsForm.GetSeperator();
+            }
+
+            newString = newString.Remove(newString.Length - 1);
+
+            return newString;
         }
     }
 }

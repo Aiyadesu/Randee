@@ -108,21 +108,17 @@ namespace Randee
         /*
          * Generates a pseudo random number between the range of 'minRange' and 'maxRange'
          */
-        public static string GenerateNumber(int numberOfNumbers, int minRange, int maxRange)
+        public static List<int> GeneratePseudoRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
             System.Random sprng = new System.Random();
+            List<int> result = new List<int>();
 
-            if(numberOfNumbers == 1)
+            for(int numbersAdded = 0; numbersAdded < numberOfNumbers; numbersAdded++)
             {
-                return sprng.Next(minRange, maxRange).ToString();
+                result.Add(sprng.Next(minRange, maxRange));
             }
 
-            for (int number = 0; number < numberOfNumbers; number++)
-            {
-                numbers += sprng.Next(minRange, maxRange).ToString() + ",";
-            }
-
-            return numbers.Remove(numbers.Length - 1);
+            return result;
         }
 
 
@@ -205,7 +201,7 @@ namespace Randee
         /// <param name="numberOfNumbers"></param>
         /// <param name="minRange"></param>
         /// <param name="maxRange"></param>
-        public static string GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
+        public static List<int> GetTrueRandomNumber(int numberOfNumbers, int minRange, int maxRange)
         {
             numbers = "";
             SetExceptionThrown(false);
@@ -216,9 +212,9 @@ namespace Randee
                 SetBitsLeft(250000);
             }
 
-            if (GetRequestsLeft() == 0) return GenerateNumber(numberOfNumbers, minRange, maxRange);
-            if (GetBitsLeft() <= 0) return GenerateNumber(numberOfNumbers, minRange, maxRange);
-            if (GetAdvisedRequestTime() != defaultDateTime && DateTime.Now.ToUniversalTime() < GetAdvisedRequestTime()) return GenerateNumber(numberOfNumbers, minRange, maxRange);
+            if (GetRequestsLeft() == 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
+            if (GetBitsLeft() <= 0) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
+            if (GetAdvisedRequestTime() != defaultDateTime && DateTime.Now.ToUniversalTime() < GetAdvisedRequestTime()) return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
 
            
             string requestID = "1414";
@@ -237,7 +233,7 @@ namespace Randee
             {
                 SetExceptionThrown(true);
 
-                return GenerateNumber(numberOfNumbers, minRange, maxRange);
+                return GeneratePseudoRandomNumber(numberOfNumbers, minRange, maxRange);
             }
 
             TrueRandomObject tro = JsonConvert.DeserializeObject<TrueRandomObject>(response);
@@ -251,7 +247,7 @@ namespace Randee
                 numbers += number + ",";
             }
 
-            return numbers.Remove(numbers.Length - 1);
+            return tro.result.random.data;
         }
 
 
