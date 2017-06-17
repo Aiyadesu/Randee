@@ -189,7 +189,7 @@ namespace Randee
                     // Retrives the previous settings for whether or not to keep a history or generated numbers
                     if(currentLine.Contains(SETTINGS_HISTORY))
                     {
-                        SetKeepHistory(settings[settings.Length - 1] == SETTINGS_ON);
+                        SetKeepHistory(currentLine[currentLine.Length - 1] == SETTINGS_ON);
                         continue;
                     }
                 }
