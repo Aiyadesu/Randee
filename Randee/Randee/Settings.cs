@@ -21,6 +21,8 @@ namespace Randee
         private const char SETTINGS_OFF = '0';
         private const char SETTINGS_ON = '1';
 
+        private const char SETTINGS_DEFAULT_SEPERATOR = ' ';
+
         /* Class Members */
         private string settingsPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\settings.txt";
 
@@ -160,7 +162,7 @@ namespace Randee
             // Adds a file with default settings called 'settings.txt'
             string settings = SETTINGS_API_KEY + (IsAPIKeySet() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n"
                             + SETTINGS_HISTORY + (GetKeepHistory() ? SETTINGS_ON : SETTINGS_OFF) + "\r\n"
-                            + SETTINGS_SEPERATOR + GetSeperator() + "\r\n";
+                            + SETTINGS_SEPERATOR + SETTINGS_DEFAULT_SEPERATOR + "\r\n";
 
             WriteToSettingsFile(settings);
         }

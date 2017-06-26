@@ -152,7 +152,7 @@ namespace Randee
 
             labelNumberDisplay.Text =
                 inputNumberOfNumbers.Value > 1 ?
-                "Your random numbers are: " : "Your random number is: " + formattedNumbers; ;
+                "Your random numbers are: " : "Your random number is: " + formattedNumbers;
 
             labelMultipleNumbers.Text =
                 inputNumberOfNumbers.Value > 1 ?
